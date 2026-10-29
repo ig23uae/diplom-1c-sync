@@ -1,6 +1,7 @@
 """Read-only 1C SOAP/OData -> SQLite. Python 3.9+, no third-party dependencies."""
 import argparse
 import base64
+from contextlib import closing
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -289,7 +290,9 @@ def main():
         dbpath = Path(config.get('database', 'data/mirror.sqlite3'))
         if not dbpath.is_absolute():
             dbpath = config_path.parent / dbpath
-        with database(dbpath) as db:
+        # Connection.__exit__ commits/rolls back, but does not close the file.
+        # Explicitly close it on returns, errors and interruption (also on Windows).
+        with closing(database(dbpath)) as db:
             if args.command == 'status':
                 print(json.dumps({'database': str(dbpath), 'datasets': db.execute(
                     'SELECT dataset, count(*), sum(active) FROM records GROUP BY dataset').fetchall(),

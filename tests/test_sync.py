@@ -184,6 +184,27 @@ class IntegrationTests(unittest.TestCase):
                 self.assertEqual(s.main(), 0)
         self.assertTrue((path.parent / 'data/mirror.sqlite3').exists())
 
+    def test_cli_closes_database_on_return_error_and_interrupt(self):
+        path = Path(self.temp.name) / 'config.json'
+        path.write_text(json.dumps(self.config))
+        for command, effect, expected in (
+            ('status', None, 0),
+            ('sync', None, 0),
+            ('sync', s.SyncError('test failure'), 1),
+            ('watch', KeyboardInterrupt(), 0),
+        ):
+            with self.subTest(command=command, effect=type(effect).__name__):
+                connection = s.database(Path(self.temp.name) / 'cli.sqlite3')
+                self.addCleanup(connection.close)
+                with patch.object(s, 'database', return_value=connection), \
+                     patch.object(s, 'sync', return_value=0, side_effect=effect), \
+                     patch.object(s.sys, 'argv', ['sync1c.py', '--config', str(path), command]), \
+                     redirect_stdout(io.StringIO()), redirect_stderr(io.StringIO()):
+                    self.assertEqual(s.main(), expected)
+                # Keep a strong reference: garbage collection must not hide a leak.
+                with self.assertRaises(sqlite3.ProgrammingError):
+                    connection.execute('SELECT 1')
+
 
 if __name__ == '__main__':
     unittest.main()
