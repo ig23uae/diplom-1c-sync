@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.1c.ru/SSL/RemoteControl_1_0_0_1" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://www.1c.ru/SSL/RemoteControl_1_0_0_1" name="RemoteControl" targetNamespace="http://www.1c.ru/SSL/RemoteControl_1_0_0_1">
+	<types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xs1="http://www.1c.ru/SSL/RemoteControl_1_0_0_1" targetNamespace="http://www.1c.ru/SSL/RemoteControl_1_0_0_1" elementFormDefault="qualified">
+			<xs:element name="GetCurrentState">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCurrentStateResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:boolean"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</types>
+	<message name="GetCurrentStateRequestMessage">
+		<part name="parameters" element="tns:GetCurrentState"/>
+	</message>
+	<message name="GetCurrentStateResponseMessage">
+		<part name="parameters" element="tns:GetCurrentStateResponse"/>
+	</message>
+	<portType name="RemoteControlPortType">
+		<operation name="GetCurrentState">
+			<input message="tns:GetCurrentStateRequestMessage"/>
+			<output message="tns:GetCurrentStateResponseMessage"/>
+		</operation>
+	</portType>
+	<binding name="RemoteControlSoapBinding" type="tns:RemoteControlPortType">
+		<soapbind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetCurrentState">
+			<soapbind:operation style="document" soapAction="http://www.1c.ru/SSL/RemoteControl_1_0_0_1#RemoteControl:GetCurrentState"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<binding name="RemoteControlSoap12Binding" type="tns:RemoteControlPortType">
+		<soap12bind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetCurrentState">
+			<soap12bind:operation style="document" soapAction="http://www.1c.ru/SSL/RemoteControl_1_0_0_1#RemoteControl:GetCurrentState"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="RemoteControl">
+		<port name="RemoteControlSoap" binding="tns:RemoteControlSoapBinding">
+			<documentation> 
+				<wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" conformsTo="http://ws-i.org/profiles/basic/1.1"/>
+			</documentation>
+			<soapbind:address location="http://localhost/testun/ws/RemoteControl.1cws"/>
+		</port>
+		<port name="RemoteControlSoap12" binding="tns:RemoteControlSoap12Binding">
+			<soap12bind:address location="http://localhost/testun/ws/RemoteControl.1cws"/>
+		</port>
+	</service>
+</definitions>

@@ -1,0 +1,10 @@
+__pycache__/
+.venv/
+config.json
+config.*.local.json
+data/
+*.sqlite3*
+.env
+
+.idea/
+.DS_Store

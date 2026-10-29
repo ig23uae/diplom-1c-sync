@@ -1,0 +1,2177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://sgu-infocom.ru/application" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://sgu-infocom.ru" xmlns:xsd2="http://sgu-infocom.ru/application" xmlns:xsd3="http://sgu-infocom.ru/common" name="WebApplication" targetNamespace="http://sgu-infocom.ru/application">
+	<types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xs1="http://sgu-infocom.ru/application" xmlns:xs2="http://sgu-infocom.ru/common" xmlns:xs3="http://sgu-infocom.ru" targetNamespace="http://sgu-infocom.ru/application" attributeFormDefault="unqualified" elementFormDefault="qualified">
+			<xs:import namespace="http://sgu-infocom.ru/common"/>
+			<xs:import namespace="http://sgu-infocom.ru"/>
+			<xs:simpleType name="ApplicationReportType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Application"/>
+					<xs:enumeration value="Agreement"/>
+					<xs:enumeration value="ApplicationReturn"/>
+					<xs:enumeration value="AgreementReturn"/>
+					<xs:enumeration value="enrollment_rejection"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="ContactInformationType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="RegistrationAddress"/>
+					<xs:enumeration value="ResidenceAddress"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="RecalculationReason">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="CTBelarus"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="AgreementType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Withdraw"/>
+					<xs:enumeration value="Agreement"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="AchievementType">
+				<xs:sequence>
+					<xs:element name="AchievementCategoryRef" type="xs2:ReferenceType"/>
+					<xs:element name="Document" type="tns:DocumentType"/>
+					<xs:element name="Comment" type="xs:string" nillable="true"/>
+					<xs:element name="Removed" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AddressType">
+				<xs:sequence>
+					<xs:element name="ContactInformationType" type="tns:ContactInformationType"/>
+					<xs:element name="Index" type="xs:string"/>
+					<xs:element name="Country" type="xs2:ReferenceType"/>
+					<xs:element name="Region" type="xs:string"/>
+					<xs:element name="Area" type="xs:string"/>
+					<xs:element name="City" type="xs:string"/>
+					<xs:element name="Place" type="xs:string"/>
+					<xs:element name="Street" type="xs:string"/>
+					<xs:element name="House" type="xs:string"/>
+					<xs:element name="Building" type="xs:string"/>
+					<xs:element name="Apartment" type="xs:string"/>
+					<xs:element name="Homeless" type="xs:boolean" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ApplicationType">
+				<xs:sequence>
+					<xs:element name="EnrollmentPriority" type="xs:integer"/>
+					<xs:element name="RowNumber" type="xs:integer"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="CompetitiveGroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="CurriculumRef" type="xs2:ReferenceType"/>
+					<xs:element name="DirectionOKSO" type="xs:string" nillable="true"/>
+					<xs:element name="ProfileRef" type="xs2:ReferenceType" minOccurs="0"/>
+					<xs:element name="EducationSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdmissionCategoryRef" type="xs2:ReferenceType"/>
+					<xs:element name="LevelBudgetRef" type="xs2:ReferenceType"/>
+					<xs:element name="Agreed" type="xs:boolean"/>
+					<xs:element name="EducationDocumentTempGUID" type="xs:string" nillable="true"/>
+					<xs:element name="EducationDocuments" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="BenefitTempGUID" type="xs:string"/>
+					<xs:element name="TargetTempGUID" type="xs:string"/>
+					<xs:element name="OlympicTempGUID" type="xs:string"/>
+					<xs:element name="EntranceTests" type="tns:EntranceTestInstance" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Files" type="tns:File" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="ApplicationStringGUID" type="xs:string" nillable="true" minOccurs="0"/>
+					<xs:element name="IsEnlisted" type="xs:long" nillable="true" minOccurs="0"/>
+					<xs:element name="ApplicationState" type="xs:string" nillable="true" minOccurs="0"/>
+					<xs:element name="AgreementTempGUID" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EGEType">
+				<xs:sequence>
+					<xs:element name="SubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="Year" type="xs:integer"/>
+					<xs:element name="Mark" type="xs:integer" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EducationDocumentType">
+				<xs:sequence>
+					<xs:element name="EducationDocumentTempGUID" type="xs:string"/>
+					<xs:element name="EducationTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="Document" type="tns:DocumentType"/>
+					<xs:element name="GraduationYear" type="xs:integer"/>
+					<xs:element name="SubdivisionCode" type="xs:string" nillable="true"/>
+					<xs:element name="EducationDocumentReferenceType" type="xs2:ReferenceType"/>
+					<xs:element name="ProfileRef" type="xs2:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="Removed" type="xs:boolean" default="false"/>
+					<xs:element name="OriginalFromInformSystem" type="xs:boolean" nillable="true" minOccurs="0"/>
+					<xs:element name="DirectionRef" type="xs2:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntranceTestAgreedType">
+				<xs:sequence>
+					<xs:element name="SubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntranceTestTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="ParentSubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="LanguageRef" type="xs2:ReferenceType"/>
+					<xs:element name="SpecialRequirementsRefs" type="xs2:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Mark" type="xs:decimal" nillable="true" minOccurs="0"/>
+					<xs:element name="EgeYear" type="xs:string"/>
+					<xs:element name="Approved" type="xs:boolean"/>
+					<xs:element name="ReadOnly" type="xs:boolean"/>
+					<xs:element name="Recalculation" type="tns:Recalculation" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="ExamsSchedule" type="tns:ExamSchedule" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Reason" type="xs:string" nillable="true"/>
+					<xs:element name="Remotely" type="xs:boolean" nillable="true"/>
+					<xs:element name="ReserveDate" type="xs:boolean" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntrantPackageType">
+				<xs:sequence>
+					<xs:element name="Entrant" type="tns:EntrantType"/>
+					<xs:element name="PersonalData" type="tns:PersonalDataType"/>
+					<xs:element name="Relatives" type="tns:Relative" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="NeedHostel" type="xs:boolean"/>
+					<xs:element name="Applications" type="tns:ApplicationType" maxOccurs="unbounded"/>
+					<xs:element name="EntranceTestsResults" type="tns:EntranceTestAgreedType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Achievements" type="tns:AchievementType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="EducationDocuments" type="tns:EducationDocumentType" maxOccurs="unbounded"/>
+					<xs:element name="Benefits" type="tns:BenefitType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Targets" type="tns:TargetType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Olympics" type="tns:OlympicType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="ApplicationDate" type="xs:dateTime" nillable="true"/>
+					<xs:element name="AdditionalDocuments" type="tns:DocumentType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AllAgreements" type="tns:Agreement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Contracts" type="tns:ContractType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Order" type="tns:OrderType" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntrantType">
+				<xs:sequence>
+					<xs:element name="EntrantRef" type="xs2:ReferenceType"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntrantPortalGUID" type="xs:string" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="IdentificateDocumentType">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="Surname" type="xs:string"/>
+					<xs:element name="Patronymic" type="xs:string"/>
+					<xs:element name="Document" type="tns:DocumentType"/>
+					<xs:element name="Removed" type="xs:boolean" default="false"/>
+					<xs:element name="IdentificateDocumentGUID" type="xs:string" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PersonalDataType">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="Surname" type="xs:string"/>
+					<xs:element name="Patronymic" type="xs:string"/>
+					<xs:element name="NameEng" type="xs:string"/>
+					<xs:element name="SurnameEng" type="xs:string"/>
+					<xs:element name="SNILS" type="tns:SNILSType" nillable="true"/>
+					<xs:element name="GenderRef" type="xs2:ReferenceType"/>
+					<xs:element name="Birthday" type="xs:date" nillable="true"/>
+					<xs:element name="Birthplace" type="xs:string" nillable="true"/>
+					<xs:element name="CitizenshipRef" type="xs2:ReferenceType"/>
+					<xs:element name="Email" type="xs:string" nillable="true"/>
+					<xs:element name="PhoneMobile" type="xs:string"/>
+					<xs:element name="PhoneHome" type="xs:string"/>
+					<xs:element name="ContactInformation" type="tns:AddressType" maxOccurs="unbounded"/>
+					<xs:element name="IdentificateDocuments" type="tns:IdentificateDocumentType" maxOccurs="unbounded"/>
+					<xs:element name="LanguageRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntrantUniqueCode" type="xs:string" nillable="true"/>
+					<xs:element name="EntrantUniqueCodeSpecialQuota" type="xs:string" nillable="true"/>
+					<xs:element name="Compatriot" type="tns:Compatriot" nillable="true"/>
+					<xs:element name="Citizenships" type="tns:Citizenship" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReferenceType">
+				<xs:sequence>
+					<xs:element name="ReferenceName" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceId" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceUID" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceClassName" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceParentUID" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceDataVersion" type="xs:string" nillable="true"/>
+					<xs:element name="IsFolder" type="xs:boolean" nillable="true" minOccurs="0"/>
+					<xs:element name="DeletionMark" type="xs:boolean" nillable="true" minOccurs="0"/>
+					<xs:element name="Posted" type="xs:boolean" nillable="true" minOccurs="0"/>
+					<xs:element name="Predefined" type="xs:boolean" nillable="true" minOccurs="0"/>
+					<xs:element name="PredefinedDataName" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="UniversalResponse">
+				<xs:sequence>
+					<xs:element name="Complete" type="xs:long"/>
+					<xs:element name="Description" type="xs:string" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PortalEntrantApplication">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntrantPortalGUID" type="xs:string"/>
+					<xs:element name="EntrantRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DeclineApplication">
+				<xs:sequence>
+					<xs:element name="PortalEntrantApplication" type="tns:PortalEntrantApplication"/>
+					<xs:element name="ManagerComment" type="xs:string"/>
+					<xs:element name="Manager" type="tns:ManagerType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ManagerType">
+				<xs:sequence>
+					<xs:element name="ManagerRef" type="xs2:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AcceptApplication">
+				<xs:sequence>
+					<xs:element name="EntrantPackage" type="tns:EntrantPackageType"/>
+					<xs:element name="ManagerComment" type="xs:string"/>
+					<xs:element name="Manager" type="tns:ManagerType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentType">
+				<xs:sequence>
+					<xs:element name="DocumentRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocSeries" type="xs:string"/>
+					<xs:element name="DocNumber" type="xs:string"/>
+					<xs:element name="DocOrganization" type="tns:Contractor" nillable="true"/>
+					<xs:element name="IssueDate" type="xs:date"/>
+					<xs:element name="DocumentCheckStatusRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="ReadOnly" type="xs:boolean" nillable="true"/>
+					<xs:element name="EndDate" type="xs:date" nillable="true"/>
+					<xs:element name="Comment" type="xs:string" nillable="true"/>
+					<xs:element name="Files" type="tns:File" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="BenefitType">
+				<xs:sequence>
+					<xs:element name="BenefitTempGUID" type="xs:string"/>
+					<xs:element name="Document" type="tns:DocumentType"/>
+					<xs:element name="BenefitRef" type="xs2:ReferenceType"/>
+					<xs:element name="SpecialMarkRef" type="xs2:ReferenceType"/>
+					<xs:element name="Removed" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TargetType">
+				<xs:sequence>
+					<xs:element name="TargetTempGUID" type="xs:string"/>
+					<xs:element name="Document" type="tns:DocumentType"/>
+					<xs:element name="TargetOrganization" type="tns:Contractor"/>
+					<xs:element name="Removed" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="OlympicType">
+				<xs:sequence>
+					<xs:element name="OlympicTempGUID" type="xs:string"/>
+					<xs:element name="Document" type="tns:DocumentType"/>
+					<xs:element name="SpecialMarkRef" type="xs2:ReferenceType"/>
+					<xs:element name="OlympicRef" type="xs2:ReferenceType"/>
+					<xs:element name="Removed" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PostEntrantPackage">
+				<xs:sequence>
+					<xs:element name="EntrantRef" type="xs2:ReferenceType"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="EntrantPackageType" type="tns:EntrantPackageType" nillable="true" minOccurs="0"/>
+					<xs:element name="Error" type="tns:Error"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="BlockEntrantApplication">
+				<xs:sequence>
+					<xs:element name="PortalEntrantApplication" type="tns:EntrantType"/>
+					<xs:element name="Manager" type="tns:ManagerType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntrantApplicationPackage">
+				<xs:sequence>
+					<xs:element name="PortalEntrantApplication" type="tns:EntrantType"/>
+					<xs:element name="Manager" type="tns:ManagerType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetApplicationReportResponse">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Scan" type="tns:Scan"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Scan">
+				<xs:sequence>
+					<xs:element name="FileName" type="xs:string"/>
+					<xs:element name="FileExt" type="xs:string"/>
+					<xs:element name="FileType" type="xs:string"/>
+					<xs:element name="FileTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="FileParts" type="tns:FilePart" maxOccurs="unbounded"/>
+					<xs:element name="FileBinaryCode" type="xs:string"/>
+					<xs:element name="Removed" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FilePart">
+				<xs:sequence>
+					<xs:element name="TransferId" type="xs:string"/>
+					<xs:element name="PartNumber" type="xs:integer"/>
+					<xs:element name="PartFileName" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Files">
+				<xs:sequence>
+					<xs:element name="File" type="tns:File" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="File">
+				<xs:sequence>
+					<xs:element name="FileUID" type="xs:string"/>
+					<xs:element name="FileHash" type="xs:string"/>
+					<xs:element name="FileName" type="xs:string"/>
+					<xs:element name="FileExt" type="xs:string"/>
+					<xs:element name="FileTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="FileParts" type="tns:FilePart" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Removed" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntranceTestInstance">
+				<xs:sequence>
+					<xs:element name="SubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntranceTestResultSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="ParentSubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="Priority" type="xs:long"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Relative">
+				<xs:sequence>
+					<xs:element name="RelationDegreeRef" type="xs2:ReferenceType"/>
+					<xs:element name="RelativePersonalData" type="tns:PersonalDataType"/>
+					<xs:element name="ParentRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FileInfo">
+				<xs:sequence>
+					<xs:element name="FileName" type="xs:string"/>
+					<xs:element name="FileExt" type="xs:string"/>
+					<xs:element name="FileUID" type="xs:string"/>
+					<xs:element name="FileHash" type="xs:string"/>
+					<xs:element name="FilePartsCount" type="xs:integer"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FileListInfo">
+				<xs:sequence>
+					<xs:element name="FileInfo" type="tns:FileInfo" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PartFileName">
+				<xs:sequence>
+					<xs:element name="PartFileName" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PartData">
+				<xs:sequence>
+					<xs:element name="PartData" type="xs:base64Binary"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetEntrantApplicationFilesList">
+				<xs:sequence>
+					<xs:element name="Entrant" type="tns:EntrantType"/>
+					<xs:element name="Manager" type="tns:ManagerType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PostEntrantApplicationFilesList">
+				<xs:sequence>
+					<xs:element name="Entrant" type="tns:EntrantType"/>
+					<xs:element name="Manager" type="tns:ManagerType"/>
+					<xs:element name="Files" type="tns:FileListInfo" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetFilePart">
+				<xs:sequence>
+					<xs:element name="TransferId" type="xs:string"/>
+					<xs:element name="PartNumber" type="xs:integer"/>
+					<xs:element name="FileName" type="xs:string"/>
+					<xs:element name="FileExt" type="xs:string"/>
+					<xs:element name="FileHash" type="xs:string"/>
+					<xs:element name="FileUID" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PutFilePart">
+				<xs:sequence>
+					<xs:element name="TransferId" type="xs:string"/>
+					<xs:element name="PartNumber" type="xs:integer"/>
+					<xs:element name="PartData" type="xs:base64Binary"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Recalculation">
+				<xs:sequence>
+					<xs:element name="Document" type="tns:DocumentType"/>
+					<xs:element name="Year" type="xs:date"/>
+					<xs:element name="PassedSubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="Mark" type="xs:integer"/>
+					<xs:element name="Reason" type="tns:RecalculationReason"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DateTimeSchedule">
+				<xs:sequence>
+					<xs:element name="DateTimeGUID" type="xs:string"/>
+					<xs:element name="StartDate" type="xs:dateTime"/>
+					<xs:element name="EndDate" type="xs:dateTime"/>
+					<xs:element name="RegistrationDate" type="xs:dateTime"/>
+					<xs:element name="EventTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ExamSchedule">
+				<xs:sequence>
+					<xs:element name="PredmetGUID" type="xs:string"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="CurriculumRef" type="xs2:ReferenceType"/>
+					<xs:element name="FinanceRef" type="xs2:ReferenceType"/>
+					<xs:element name="FormRef" type="xs2:ReferenceType"/>
+					<xs:element name="GroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="SubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="DateTimes" type="tns:DateTimeSchedule" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetDocumentsReturnFormResponce">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Scan" type="tns:Scan"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Agreement">
+				<xs:sequence>
+					<xs:element name="AgreementType" type="tns:AgreementType"/>
+					<xs:element name="Date" type="xs:dateTime"/>
+					<xs:element name="Number" type="xs:string" nillable="true"/>
+					<xs:element name="ApplicationDescription" type="xs:string"/>
+					<xs:element name="ApplicationStringGUID" type="xs:string"/>
+					<xs:element name="AgreementKindRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="AgreementReasonRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="AgreementTempGUID" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="OrderType">
+				<xs:sequence>
+					<xs:element name="Receipt" type="xs:boolean"/>
+					<xs:element name="OrderInfo" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ContractType">
+				<xs:sequence>
+					<xs:element name="ContractName" type="xs:string"/>
+					<xs:element name="ContractRef" type="xs2:ReferenceType"/>
+					<xs:element name="idApplicationString" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntrantProfilePackage">
+				<xs:sequence>
+					<xs:element name="Entrant" type="tns:EntrantType"/>
+					<xs:element name="PersonalData" type="tns:PersonalDataType"/>
+					<xs:element name="Relatives" type="tns:Relative" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="NeedHostel" type="xs:boolean"/>
+					<xs:element name="AdditionalDocuments" type="tns:DocumentType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Contractor">
+				<xs:sequence>
+					<xs:element name="ContractorRef" type="xs2:ReferenceType"/>
+					<xs:element name="SubdivisionCode" type="xs:string" nillable="true"/>
+					<xs:element name="ContractorTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="ContactInformation" type="tns:AddressType" nillable="true" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbiturientCampaignsResponse">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Campaign" type="xs2:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Compatriot">
+				<xs:sequence>
+					<xs:element name="Compatriot" type="xs:boolean"/>
+					<xs:element name="Document" type="tns:DocumentType"/>
+					<xs:element name="CompatriotStatusRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Error">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:int"/>
+					<xs:element name="Description" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Citizenship">
+				<xs:sequence>
+					<xs:element name="CitizenshipRef" type="xs2:ReferenceType"/>
+					<xs:element name="Period" type="xs:date"/>
+					<xs:element name="Primary" type="xs:boolean"/>
+					<xs:element name="IdentificateDocumentGUID" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="SNILSType">
+				<xs:sequence>
+					<xs:element name="SNILS" type="xs:string"/>
+					<xs:element name="Files" type="tns:File" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetEntrantPackage">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Entrant" type="tns:EntrantType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEntrantPackageResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:EntrantPackageType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PostEntrantPackage">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EntrantPackage" type="tns:EntrantPackageType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PostEntrantPackageResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:PostEntrantPackage"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TestConnection">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TestConnectionResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetApplicationReport">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EntrantPackage" type="tns:EntrantPackageType"/>
+						<xs:element name="ReportType" type="tns:ApplicationReportType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetApplicationReportResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PutFilePart">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TransferId" type="xs:string"/>
+						<xs:element name="PartNumber" type="xs:string"/>
+						<xs:element name="PartData" type="xs:base64Binary"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PutFilePartResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:PartFileName"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFilesList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Entrant" type="tns:EntrantType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFilesListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:FileListInfo"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PostFilesList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Entrant" type="tns:EntrantType"/>
+						<xs:element name="Files" type="tns:FileListInfo"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PostFilesListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:FileListInfo"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFilePart">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TransferId" type="xs:string"/>
+						<xs:element name="PartNumber" type="xs:integer"/>
+						<xs:element name="FileName" type="xs:string"/>
+						<xs:element name="FileExt" type="xs:string"/>
+						<xs:element name="FileHash" type="xs:string"/>
+						<xs:element name="FileUID" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFilePartResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:PartData"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetDocumentsReturnForm">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EntrantPackage" type="tns:EntrantPackageType"/>
+						<xs:element name="ReportType" type="tns:ApplicationReportType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetDocumentsReturnFormResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetDocumentsReturnFormResponce"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersions">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersionsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs2:InterfaceVersionsType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersion">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersionResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEntrantProfilePackage">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EntrantRef" type="xs2:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEntrantProfilePackageResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:EntrantProfilePackage"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCampaigns">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EntrantRef" type="xs2:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCampaignsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs3:GetAbiturientCampaignsResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:tns="http://sgu-infocom.ru/common" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://sgu-infocom.ru/common" attributeFormDefault="unqualified" elementFormDefault="qualified">
+			<xs:complexType name="ReferenceType">
+				<xs:sequence>
+					<xs:element name="ReferenceName" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceId" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceUID" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceClassName" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceParentUID" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceDataVersion" type="xs:string" nillable="true"/>
+					<xs:element name="IsFolder" type="xs:boolean"/>
+					<xs:element name="DeletionMark" type="xs:boolean"/>
+					<xs:element name="Posted" type="xs:boolean"/>
+					<xs:element name="Predefined" type="xs:boolean"/>
+					<xs:element name="PredefinedDataName" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="tns:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InterfaceVersionType">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string" nillable="true"/>
+					<xs:element name="Version" type="xs:string" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InterfaceVersionsType">
+				<xs:sequence>
+					<xs:element name="InterfaceVersion" type="tns:InterfaceVersionType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdditionalElement">
+				<xs:sequence>
+					<xs:element name="ElementName" type="xs:string"/>
+					<xs:element name="ElementValue"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+		<xs:schema xmlns:ns1="http://sgu-infocom.ru/common" xmlns:tns="http://sgu-infocom.ru" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://sgu-infocom.ru" attributeFormDefault="unqualified" elementFormDefault="qualified">
+			<xs:import namespace="http://sgu-infocom.ru/common"/>
+			<xs:simpleType name="ApplicationReportType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Application"/>
+					<xs:enumeration value="Agreement"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="AbiturientIdentDocCategory">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Passport"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="TextFilterType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Disabled"/>
+					<xs:enumeration value="AnyPosition"/>
+					<xs:enumeration value="BeginningOfLine"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="LogicalOperatorType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="And"/>
+					<xs:enumeration value="Or"/>
+					<xs:enumeration value="Not"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="ComparisonType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="InList"/>
+					<xs:enumeration value="InHierarchy"/>
+					<xs:enumeration value="Like"/>
+					<xs:enumeration value="Equal"/>
+					<xs:enumeration value="NotEqual"/>
+					<xs:enumeration value="Less"/>
+					<xs:enumeration value="Greater"/>
+					<xs:enumeration value="LessOrEqual"/>
+					<xs:enumeration value="GreaterOrEqual"/>
+					<xs:enumeration value="NotInList"/>
+					<xs:enumeration value="NotInHierarchy"/>
+					<xs:enumeration value="NotLike"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="ContactInformationType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="RegistrationAddress"/>
+					<xs:enumeration value="ResidenceAddress"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="AbitCode">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="DeletionMark" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReceiptStrings">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="StringsPlanPriema" type="tns:StringsPlanPriema"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReceiptString">
+				<xs:sequence>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="SubdivisionRef" type="ns1:ReferenceType"/>
+					<xs:element name="SpecialityCodeOKSO" type="xs:string" nillable="true"/>
+					<xs:element name="DirectionRef" type="ns1:ReferenceType"/>
+					<xs:element name="ProfileRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationLevelRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationFormRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationProgramRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationSourceRef" type="ns1:ReferenceType"/>
+					<xs:element name="CompetitiveGroupRef" type="ns1:ReferenceType"/>
+					<xs:element name="DetailGroupRef" type="ns1:ReferenceType"/>
+					<xs:element name="ReceiptAllow" type="xs:boolean"/>
+					<xs:element name="SpecialRight" type="xs:boolean"/>
+					<xs:element name="LevelBudgetRef" type="ns1:ReferenceType"/>
+					<xs:element name="CurriculumRef" type="ns1:ReferenceType"/>
+					<xs:element name="UGSRef" type="ns1:ReferenceType"/>
+					<xs:element name="GraduatingDepartmentRef" type="ns1:ReferenceType"/>
+					<xs:element name="BranchRef" type="ns1:ReferenceType"/>
+					<xs:element name="CombinedCompetitiveGroup" type="xs:boolean"/>
+					<xs:element name="ParentCombinedCompetitiveGroupRef" type="ns1:ReferenceType" nillable="true"/>
+					<xs:element name="OnlyForForeignCitizens" type="xs:boolean"/>
+					<xs:element name="OnlyForRussianCitizens" type="xs:boolean"/>
+					<xs:element name="AllowCompatriots" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="StringPlanPriema">
+				<xs:sequence>
+					<xs:element name="Priority" type="xs:long"/>
+					<xs:element name="IdPK" type="xs:string" nillable="true"/>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="ProfilCode" type="xs:string" nillable="true"/>
+					<xs:element name="ProfileRef" type="ns1:ReferenceType"/>
+					<xs:element name="FinanceCode" type="xs:string"/>
+					<xs:element name="EducationSourceRef" type="ns1:ReferenceType"/>
+					<xs:element name="GroupCode" type="xs:string"/>
+					<xs:element name="CompetitiveGroupRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdmissionCategoryCode" type="xs:string"/>
+					<xs:element name="AdmissionCategoryRef" type="ns1:ReferenceType"/>
+					<xs:element name="PrivilegeCode" type="xs:string"/>
+					<xs:element name="BenefitRef" type="ns1:ReferenceType"/>
+					<xs:element name="SpecialMarkCode" type="xs:string"/>
+					<xs:element name="SpecialMarkRef" type="ns1:ReferenceType"/>
+					<xs:element name="TargetOrganization" type="xs:string"/>
+					<xs:element name="Document" type="tns:Document"/>
+					<xs:element name="BudgetLevelCode" type="xs:string"/>
+					<xs:element name="LevelBudgetRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationDocument" type="tns:EducationDocument"/>
+					<xs:element name="EntranceTests" type="tns:EntranceTestInstance" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="WithoutEntranceExams" type="xs:boolean" nillable="true" minOccurs="0"/>
+					<xs:element name="WithoutEntranceExamsSpecialMarkRef" type="ns1:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="WithoutEntranceExamsSourceDoc" type="tns:Document" nillable="true" minOccurs="0"/>
+					<xs:element name="CurriculumRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CreateApplicationResponse">
+				<xs:sequence>
+					<xs:element name="Complete" type="xs:long"/>
+					<xs:element name="Description" type="xs:string" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="StringsPlanPriema">
+				<xs:sequence>
+					<xs:element name="StringPlanPriema" type="tns:ReceiptString" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetEGEPriema">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Predmet" type="tns:PredmetEGE" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PredmetEGE">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="SubjectRef" type="ns1:ReferenceType"/>
+					<xs:element name="IdPK" type="xs:string" nillable="true"/>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="CompetitiveGroupRef" type="ns1:ReferenceType"/>
+					<xs:element name="IndividualAchievementGroupRef" type="ns1:ReferenceType" nillable="true"/>
+					<xs:element name="PointsInGroupAreAwardedOnce" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetPK">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="PK" type="tns:PK" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PK">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="MaximalSpeciality" type="xs:long"/>
+					<xs:element name="MaximalSpecialityType" type="xs:string"/>
+					<xs:element name="CountAllDirectionsSeparatelyOnTargetQuotasRegardlessOfMultiprofileCompetition" type="xs:boolean"/>
+					<xs:element name="Description" type="xs:string"/>
+					<xs:element name="ReceptionAllowed" type="xs:boolean"/>
+					<xs:element name="AddModifyConsentsAllowed" type="xs:boolean"/>
+					<xs:element name="CheckSNILS" type="xs:boolean"/>
+					<xs:element name="IsAllowedMultipleApplicationsToOneGroup" type="xs:boolean"/>
+					<xs:element name="CampaignToken" type="xs:string"/>
+					<xs:element name="RequirePreviousPassports" type="xs:boolean"/>
+					<xs:element name="PriorityConditions" type="tns:PriorityCondition" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="UseCommonAgreements" type="xs:boolean"/>
+					<xs:element name="AgreementConditions" type="tns:AgreementCondition" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AllowMultiplyEducationDocuments" type="xs:boolean"/>
+					<xs:element name="CommonEducationDocument" type="xs:boolean"/>
+					<xs:element name="SeparateSpecialitiesForBudgetAndFullPayment" type="xs:boolean"/>
+					<xs:element name="AllowOriginalFromInformSystem" type="xs:boolean"/>
+					<xs:element name="SeparateAgreementsForBudgetAndFullPayment" type="xs:boolean"/>
+					<xs:element name="EnterFIOInRussianCyrillic" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="UniversalPredmet">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="NeedBlockAndUpdate">
+				<xs:sequence>
+					<xs:element name="Update" type="xs:long" nillable="true"/>
+					<xs:element name="Block" type="xs:long" nillable="true"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetPKInfo">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Stage" type="tns:Stage" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Stage">
+				<xs:sequence>
+					<xs:element name="Finance" type="xs:string"/>
+					<xs:element name="EducationSourceRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationForm" type="xs:string"/>
+					<xs:element name="EducationFormRef" type="ns1:ReferenceType"/>
+					<xs:element name="CategoryCode" type="xs:string"/>
+					<xs:element name="AdmissionCategoryRef" type="ns1:ReferenceType"/>
+					<xs:element name="DetailGroupCode" type="xs:string"/>
+					<xs:element name="DetailGroupRef" type="ns1:ReferenceType"/>
+					<xs:element name="DateStart" type="xs:dateTime"/>
+					<xs:element name="DateFinal" type="xs:dateTime"/>
+					<xs:element name="DateStartOrder" type="xs:date"/>
+					<xs:element name="DateFinalOrder" type="xs:date"/>
+					<xs:element name="CampaignEventPeriods" type="tns:CampaignEventPeriods"/>
+					<xs:element name="EducationLevelRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetMinimalBall">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Exam" type="tns:MinimalBallExam" nillable="true" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="MinimalBallExam">
+				<xs:sequence>
+					<xs:element name="PredmetCode" type="xs:string" nillable="true"/>
+					<xs:element name="PredmetName" type="xs:string" nillable="true"/>
+					<xs:element name="SubjectRef" type="ns1:ReferenceType" nillable="true"/>
+					<xs:element name="Form" type="xs:string" nillable="true"/>
+					<xs:element name="FormCode" type="xs:string" nillable="true"/>
+					<xs:element name="EntranceTestResultSourceRef" type="ns1:ReferenceType" nillable="true"/>
+					<xs:element name="ChangePredmet" type="xs:string" nillable="true"/>
+					<xs:element name="AlternativeSubjectRef" type="ns1:ReferenceType" nillable="true"/>
+					<xs:element name="Ball" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PredmetsPK">
+				<xs:sequence>
+					<xs:element name="Predmet" type="tns:PredmetPK" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PredmetPK">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="ParentPredmet" type="xs:string"/>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="AllowForm" type="tns:Form" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Form">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="ReadOnly" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="UniversalResponse">
+				<xs:sequence>
+					<xs:element name="Complete" type="xs:long"/>
+					<xs:element name="Description" type="xs:string" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbiturientCodeDoublesResponse">
+				<xs:sequence>
+					<xs:element name="AbiturientDoubles" type="tns:AbiturientDouble" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AbiturientDouble">
+				<xs:sequence>
+					<xs:element name="EntrantRef" type="ns1:ReferenceType"/>
+					<xs:element name="Birthdate" type="xs:date"/>
+					<xs:element name="LastName" type="xs:string"/>
+					<xs:element name="FirstName" type="xs:string"/>
+					<xs:element name="SecondName" type="xs:string" nillable="true"/>
+					<xs:element name="PassportSeries" type="xs:string" nillable="true"/>
+					<xs:element name="PassportNumber" type="xs:string" nillable="true"/>
+					<xs:element name="INN" type="xs:string" nillable="true"/>
+					<xs:element name="SNILS" type="xs:string" nillable="true"/>
+					<xs:element name="BirthPlace" type="xs:string" nillable="true"/>
+					<xs:element name="Citizenship" type="xs:string" nillable="true"/>
+					<xs:element name="DeletionMark" type="xs:boolean"/>
+					<xs:element name="DocumentTypeRef" type="ns1:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllSpecialMarks">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AllSpecialMarks" type="tns:AllSpecialMarks" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AllSpecialMarks">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AllOlympiads">
+				<xs:sequence>
+					<xs:element name="OlympicRef" type="ns1:ReferenceType"/>
+					<xs:element name="Date" type="xs:date"/>
+					<xs:element name="Place" type="xs:string"/>
+					<xs:element name="OlympicTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="OlympicLevelRef" type="ns1:ReferenceType"/>
+					<xs:element name="OlympicKindRef" type="ns1:ReferenceType"/>
+					<xs:element name="OlympicClassRef" type="ns1:ReferenceType"/>
+					<xs:element name="OlympicProfileRef" type="ns1:ReferenceType"/>
+					<xs:element name="ConfirmationEGE" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllOlympiads">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AllOlympiads" type="tns:AllOlympiads" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdmissionProcedures">
+				<xs:sequence>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="FinanceCode" type="xs:string"/>
+					<xs:element name="EducationSourceRef" type="ns1:ReferenceType"/>
+					<xs:element name="CategoryCode" type="xs:string"/>
+					<xs:element name="AdmissionCategoryRef" type="ns1:ReferenceType"/>
+					<xs:element name="PrivilegeCode" type="xs:string"/>
+					<xs:element name="BenefitRef" type="ns1:ReferenceType"/>
+					<xs:element name="SpecialMarkCode" type="xs:string"/>
+					<xs:element name="SpecialMarkRef" type="ns1:ReferenceType"/>
+					<xs:element name="IndividualValue" type="xs:boolean"/>
+					<xs:element name="PriorityRight" type="xs:boolean"/>
+					<xs:element name="WithoutEntranceExams" type="xs:boolean" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllAdmissionProcedures">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AdmissionProcedures" type="tns:AdmissionProcedures" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Document">
+				<xs:sequence>
+					<xs:element name="DocumentType" type="xs:string"/>
+					<xs:element name="DocumentTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="DocumentSeries" type="xs:string"/>
+					<xs:element name="DocumentNumber" type="xs:string"/>
+					<xs:element name="DocumentDate" type="xs:date"/>
+					<xs:element name="DocumentOrganization" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DisciplineSet">
+				<xs:sequence>
+					<xs:element name="idPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="FacultetCode" type="xs:string"/>
+					<xs:element name="SubdivisionRef" type="ns1:ReferenceType"/>
+					<xs:element name="SpecialityCode" type="xs:string"/>
+					<xs:element name="DirectionRef" type="ns1:ReferenceType"/>
+					<xs:element name="ProfilCode" type="xs:string" nillable="true"/>
+					<xs:element name="ProfileRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationLevelCode" type="xs:string"/>
+					<xs:element name="EducationLevelRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationFormCode" type="xs:string"/>
+					<xs:element name="EducationFormRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationProgramCode" type="xs:string" nillable="true"/>
+					<xs:element name="EducationProgramRef" type="ns1:ReferenceType"/>
+					<xs:element name="GroupCode" type="xs:string"/>
+					<xs:element name="CompetitiveGroupRef" type="ns1:ReferenceType"/>
+					<xs:element name="DisciplineSetID" type="xs:string"/>
+					<xs:element name="SubjectsSetRef" type="ns1:ReferenceType"/>
+					<xs:element name="DisciplineID" type="xs:string"/>
+					<xs:element name="DisciplineName" type="xs:string"/>
+					<xs:element name="SubjectRef" type="ns1:ReferenceType"/>
+					<xs:element name="DisciplineFormID" type="xs:string"/>
+					<xs:element name="DisciplineFormName" type="xs:string"/>
+					<xs:element name="EntranceTestResultSourceRef" type="ns1:ReferenceType"/>
+					<xs:element name="ChildDisciplineID" type="xs:string"/>
+					<xs:element name="ChildDisciplineName" type="xs:string"/>
+					<xs:element name="ChildSubjectRef" type="ns1:ReferenceType"/>
+					<xs:element name="ChangeDisciplineID" type="xs:string"/>
+					<xs:element name="ChangeDisciplineName" type="xs:string"/>
+					<xs:element name="AlternativeSubjectRef" type="ns1:ReferenceType"/>
+					<xs:element name="MinimalBall" type="xs:decimal"/>
+					<xs:element name="CurriculumRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllPredmets">
+				<xs:sequence>
+					<xs:element name="Discipline" type="tns:DisciplineSet" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentTypesAbiturient">
+				<xs:sequence>
+					<xs:element name="idPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="DocumentSetCode" type="xs:string"/>
+					<xs:element name="DocumentSetRef" type="ns1:ReferenceType"/>
+					<xs:element name="DocumentTypeCode" type="xs:string"/>
+					<xs:element name="DocumentTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="NumberDocument" type="xs:string"/>
+					<xs:element name="ScanRequired" type="xs:boolean"/>
+					<xs:element name="NeedOneOfDocuments" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllDocumentTypesAbiturient">
+				<xs:sequence>
+					<xs:element name="DocumentTypeAbiturient" type="tns:DocumentTypesAbiturient" maxOccurs="unbounded"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Olympiad">
+				<xs:sequence>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="SpecialMarkCode" type="xs:string"/>
+					<xs:element name="SpecialMarkRef" type="ns1:ReferenceType"/>
+					<xs:element name="OlympiadCode" type="xs:string"/>
+					<xs:element name="OlympicRef" type="ns1:ReferenceType"/>
+					<xs:element name="CurriculumCode" type="xs:string"/>
+					<xs:element name="CurriculumRef" type="ns1:ReferenceType"/>
+					<xs:element name="VariantOfRetest" type="xs:string"/>
+					<xs:element name="VariantOfRetestRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetOlympiad">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Olympiad" type="tns:Olympiad" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAvailableDocumentTypes">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AvailableDocumentTypes" type="tns:AvailableDocumentTypes" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AvailableDocumentTypes">
+				<xs:sequence>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="IdSubject" type="xs:string"/>
+					<xs:element name="SubjectType" type="xs:string"/>
+					<xs:element name="FilterRef" type="ns1:ReferenceType"/>
+					<xs:element name="DocumentType" type="xs:string"/>
+					<xs:element name="DocumentTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="ScanRequired" type="xs:boolean"/>
+					<xs:element name="NeedOneOfDocuments" type="xs:boolean"/>
+					<xs:element name="DocumentSetCode" type="xs:string"/>
+					<xs:element name="DocumentSetRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetReasons">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Reason" type="tns:Reason" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Reason">
+				<xs:sequence>
+					<xs:element name="ReasonCode" type="xs:string"/>
+					<xs:element name="ReasonName" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetLanguages">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Language" type="tns:Language" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Language">
+				<xs:sequence>
+					<xs:element name="LanguageCode" type="xs:string"/>
+					<xs:element name="LanguageName" type="xs:string"/>
+					<xs:element name="LanguageRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbitContractList">
+				<xs:sequence>
+					<xs:element name="Contract" type="tns:Contract" maxOccurs="unbounded"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Contract">
+				<xs:sequence>
+					<xs:element name="ContractName" type="xs:string"/>
+					<xs:element name="ContractRef" type="ns1:ReferenceType"/>
+					<xs:element name="idApplicationString" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReferenceType">
+				<xs:sequence>
+					<xs:element name="ReferenceName" type="xs:string"/>
+					<xs:element name="ReferenceId" type="xs:string"/>
+					<xs:element name="ReferenceUID" type="xs:string"/>
+					<xs:element name="ReferenceClassName" type="xs:string"/>
+					<xs:element name="ReferenceParentUID" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceDataVersion" type="xs:string" nillable="true"/>
+					<xs:element name="IsFolder" type="xs:boolean"/>
+					<xs:element name="DeletionMark" type="xs:boolean"/>
+					<xs:element name="Posted" type="xs:boolean"/>
+					<xs:element name="Predefined" type="xs:boolean"/>
+					<xs:element name="PredefinedDataName" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetContractReportResponse">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="ContractFile" type="tns:ContractFile"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ContractFile">
+				<xs:sequence>
+					<xs:element name="FileName" type="xs:string"/>
+					<xs:element name="FileExt" type="xs:string"/>
+					<xs:element name="FileBinaryCode" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbiturientCodeAlt">
+				<xs:sequence>
+					<xs:element name="AbitCode" type="xs:string"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Documents">
+				<xs:sequence>
+					<xs:element name="Document" type="tns:DocumentAlt" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentAlt">
+				<xs:sequence>
+					<xs:element name="DocCategory" type="tns:AbiturientIdentDocCategory"/>
+					<xs:element name="DocType" type="xs:string"/>
+					<xs:element name="DocumentTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="DocNumber" type="xs:string"/>
+					<xs:element name="DocSeries" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PartFileName">
+				<xs:sequence>
+					<xs:element name="PartFileName" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FilePart">
+				<xs:sequence>
+					<xs:element name="TransferId" type="xs:string"/>
+					<xs:element name="PartNumber" type="xs:int"/>
+					<xs:element name="PartFileName" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CreateAnketaParentResponse">
+				<xs:sequence>
+					<xs:element name="AbiturientCode" type="xs:string"/>
+					<xs:element name="ParentRef" type="ns1:ReferenceType"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetReferenceResponse">
+				<xs:sequence>
+					<xs:element name="Reference" type="ns1:ReferenceType"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Error">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:int"/>
+					<xs:element name="Description" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetReferencesResponse">
+				<xs:sequence>
+					<xs:element name="References" type="ns1:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Overflow" type="xs:boolean"/>
+					<xs:element name="AllRowsCount" type="xs:int"/>
+					<xs:element name="ShowedRowsCount" type="xs:int"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FiltersType">
+				<xs:sequence>
+					<xs:element name="Operator" type="tns:LogicalOperatorType" nillable="true" minOccurs="0"/>
+					<xs:element name="SimpleFilters" type="tns:FilterType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="InsertedFilters" type="tns:FiltersType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FilterType">
+				<xs:sequence>
+					<xs:element name="Field" type="xs:string"/>
+					<xs:element name="Comparison" type="tns:ComparisonType"/>
+					<xs:element name="Values" type="tns:CompositeType" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CompositeType">
+				<xs:sequence>
+					<xs:element name="ValueType" type="xs:string"/>
+					<xs:element name="Value" nillable="true" minOccurs="0"/>
+					<xs:element name="ValueRef" type="ns1:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Entrant">
+				<xs:sequence>
+					<xs:element name="EntrantRef" type="ns1:ReferenceType"/>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="EntrantPortalGUID" type="xs:string" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CampaignEventPeriod">
+				<xs:sequence>
+					<xs:element name="DateStart" type="xs:dateTime"/>
+					<xs:element name="DateEnd" type="xs:dateTime"/>
+					<xs:element name="AllowAgreementSubmissionOnCompetitiveGroupApplicationDay" type="xs:boolean"/>
+					<xs:element name="AllowAgreementSubmissionOnFirstApplicationDay" type="xs:boolean"/>
+					<xs:element name="PeriodTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CampaignEventPeriods">
+				<xs:sequence>
+					<xs:element name="CampaignEventPeriod" type="tns:CampaignEventPeriod" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PortalEntrantApplication">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="EntrantPortalGUID" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CompetitiveGroupEntranceTests">
+				<xs:sequence>
+					<xs:element name="CompetitiveGroupEntranceTest" type="tns:CompetitiveGroupEntranceTestType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CompetitiveGroupEntranceTestType">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="CompetitiveGroupRef" type="ns1:ReferenceType"/>
+					<xs:element name="CurriculumRef" type="ns1:ReferenceType"/>
+					<xs:element name="EntranceTestSets" type="tns:EntranceTestSetType" maxOccurs="unbounded"/>
+					<xs:element name="AllowMultiplyAlternativeSubjects" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntranceTestSetType">
+				<xs:sequence>
+					<xs:element name="EntranceTestSetRef" type="ns1:ReferenceType"/>
+					<xs:element name="EntranceTests" type="tns:EntranceTestType" maxOccurs="unbounded"/>
+					<xs:element name="AdmissionConditionGroupRef" type="ns1:ReferenceType" nillable="true"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntranceTestType">
+				<xs:sequence>
+					<xs:element name="Priority" type="xs:long"/>
+					<xs:element name="SubjectRef" type="ns1:ReferenceType"/>
+					<xs:element name="EntranceTestResultSourceRef" type="ns1:ReferenceType"/>
+					<xs:element name="MinScore" type="xs:decimal" nillable="true"/>
+					<xs:element name="ChildSubjects" type="tns:ChildSubjectType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ChildSubjectType">
+				<xs:sequence>
+					<xs:element name="ChildSubjectIndex" type="xs:long"/>
+					<xs:element name="ChildSubjectRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EducationLevelDocumentTypeMap">
+				<xs:sequence>
+					<xs:element name="Period" type="xs:dateTime"/>
+					<xs:element name="EducationTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationLevelRef" type="ns1:ReferenceType"/>
+					<xs:element name="DocumentTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="Actual" type="xs:boolean"/>
+					<xs:element name="AllowProfileInput" type="xs:boolean"/>
+					<xs:element name="AllowDirectionDisplay" type="xs:boolean"/>
+					<xs:element name="AllowProfileDisplay" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetEducationLevelDocumentTypeMap">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="EducationLevelDocumentTypeMap" type="tns:EducationLevelDocumentTypeMap" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EducationDocument">
+				<xs:sequence>
+					<xs:element name="EducationDocumentReferenceType" type="ns1:ReferenceType"/>
+					<xs:element name="EducationTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="DocumentTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="DocSeries" type="xs:string"/>
+					<xs:element name="DocNumber" type="xs:string"/>
+					<xs:element name="DocOrganization" type="xs:string"/>
+					<xs:element name="IssueDate" type="xs:date"/>
+					<xs:element name="GraduationYear" type="xs:integer"/>
+					<xs:element name="SubdivisionCode" type="xs:string"/>
+					<xs:element name="ProfileRef" type="ns1:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PredmetOfExamsSchedule">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType" nillable="true"/>
+					<xs:element name="CurriculumRef" type="ns1:ReferenceType"/>
+					<xs:element name="FinanceRef" type="ns1:ReferenceType"/>
+					<xs:element name="GroupRef" type="ns1:ReferenceType"/>
+					<xs:element name="SubjectRef" type="ns1:ReferenceType"/>
+					<xs:element name="FormRef" type="ns1:ReferenceType"/>
+					<xs:element name="PredmetGUID" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetPredmetsOfExamsSchedule">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="PredmetOfExamsSchedule" type="tns:PredmetOfExamsSchedule" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DateTimeOfExamsSchedule">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="PredmetGUID" type="xs:string"/>
+					<xs:element name="GUIDDateTime" type="xs:string"/>
+					<xs:element name="EventTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="StartDate" type="xs:dateTime"/>
+					<xs:element name="EndDate" type="xs:dateTime"/>
+					<xs:element name="RegistrationDate" type="xs:dateTime"/>
+					<xs:element name="ClassroomRef" type="ns1:ReferenceType"/>
+					<xs:element name="Note" type="xs:string"/>
+					<xs:element name="Remotely" type="xs:boolean"/>
+					<xs:element name="LanguageRef" type="ns1:ReferenceType"/>
+					<xs:element name="ReserveDate" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetDateTimeOfExamsSchedule">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="DateTimeOfExamsSchedule" type="tns:DateTimeOfExamsSchedule" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAdditionalReceiptDateControl">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AdditionalReceiptDateControl" type="tns:AdditionalReceiptDateControl" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdditionalReceiptDateControl">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="CompetitiveGroupRef" type="ns1:ReferenceType"/>
+					<xs:element name="Stage" type="xs:long"/>
+					<xs:element name="DateStart" type="xs:dateTime"/>
+					<xs:element name="DateFinal" type="xs:dateTime"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbiturientCampaignsResponse">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Campaign" type="ns1:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntranceTestInstance">
+				<xs:sequence>
+					<xs:element name="SubjectRef" type="ns1:ReferenceType"/>
+					<xs:element name="EntranceTestResultSourceRef" type="ns1:ReferenceType"/>
+					<xs:element name="ParentSubjectRef" type="ns1:ReferenceType"/>
+					<xs:element name="Priority" type="xs:long"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AddressType">
+				<xs:sequence>
+					<xs:element name="ContactInformationType" type="tns:ContactInformationType"/>
+					<xs:element name="Index" type="xs:string"/>
+					<xs:element name="Country" type="ns1:ReferenceType"/>
+					<xs:element name="Region" type="xs:string"/>
+					<xs:element name="Area" type="xs:string"/>
+					<xs:element name="City" type="xs:string"/>
+					<xs:element name="Place" type="xs:string"/>
+					<xs:element name="Street" type="xs:string"/>
+					<xs:element name="House" type="xs:string"/>
+					<xs:element name="Building" type="xs:string"/>
+					<xs:element name="Apartment" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="IdentificateDocumentType">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="Surname" type="xs:string"/>
+					<xs:element name="Patronymic" type="xs:string"/>
+					<xs:element name="Document" type="tns:DocumentType"/>
+					<xs:element name="SubdivisionCode" type="xs:string" nillable="true"/>
+					<xs:element name="Removed" type="xs:boolean" default="false"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentType">
+				<xs:sequence>
+					<xs:element name="DocumentTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="DocSeries" type="xs:string"/>
+					<xs:element name="DocNumber" type="xs:string"/>
+					<xs:element name="DocOrganization" type="xs:string" nillable="true"/>
+					<xs:element name="IssueDate" type="xs:date"/>
+					<xs:element name="DocumentCheckStatusRef" type="ns1:ReferenceType" nillable="true"/>
+					<xs:element name="ReadOnly" type="xs:boolean" nillable="true"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="File">
+				<xs:sequence>
+					<xs:element name="FileUID" type="xs:string"/>
+					<xs:element name="FileHash" type="xs:string"/>
+					<xs:element name="FileName" type="xs:string"/>
+					<xs:element name="FileExt" type="xs:string"/>
+					<xs:element name="FileTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="FileParts" type="tns:FilePart" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Removed" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbiturientCodePassFIOBDateResponce">
+				<xs:sequence>
+					<xs:element name="AbiturientDoubles" type="tns:AbiturientDouble" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentTypeProperties">
+				<xs:sequence>
+					<xs:element name="DocumentTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="Properties" type="tns:Property" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Property">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="IsUsed" type="xs:boolean"/>
+					<xs:element name="FillChecking" type="xs:boolean"/>
+					<xs:element name="Pattern" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetDocumentTypePropertySettingsResponce">
+				<xs:sequence>
+					<xs:element name="DocumentTypeProperties" type="tns:DocumentTypeProperties" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAvailableDocumentTypesResponce">
+				<xs:sequence>
+					<xs:element name="CampaignAvailableDocumentTypes" type="tns:CampaignAvailableDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CampaignAvailableDocumentType">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="ns1:ReferenceType"/>
+					<xs:element name="DocumentSets" type="tns:DocumentSet" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentSet">
+				<xs:sequence>
+					<xs:element name="DocumentSetRef" type="ns1:ReferenceType"/>
+					<xs:element name="NeedOneOfDocuments" type="xs:boolean"/>
+					<xs:element name="Filters" type="tns:DocumentSetFilter" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="DocumentTypes" type="tns:DocumentSetDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentSetFilter">
+				<xs:sequence>
+					<xs:element name="FilterTypeName" type="xs:string"/>
+					<xs:element name="FilterValueRef" type="ns1:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentSetDocumentType">
+				<xs:sequence>
+					<xs:element name="DocumentTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="ScanRequired" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CompetitiveGroupRefs">
+				<xs:sequence>
+					<xs:element name="CompetitiveGroupRef" type="ns1:ReferenceType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Contractor">
+				<xs:sequence>
+					<xs:element name="ContractorRef" type="ns1:ReferenceType"/>
+					<xs:element name="SubdivisionCode" type="xs:string" nillable="true"/>
+					<xs:element name="ContractorTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="ContactInformation" type="tns:AddressType" nillable="true" maxOccurs="unbounded"/>
+					<xs:element name="FullName" type="xs:string" nillable="true"/>
+					<xs:element name="ShortName" type="xs:string" nillable="true"/>
+					<xs:element name="UIDTargetContractor" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ContractorListResponse">
+				<xs:sequence>
+					<xs:element name="Contractors" type="tns:Contractor" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Overflow" type="xs:boolean"/>
+					<xs:element name="AllRowsCount" type="xs:int"/>
+					<xs:element name="ShowedRowsCount" type="xs:int"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PriorityCondition">
+				<xs:sequence>
+					<xs:element name="ConditionRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AgreementCondition">
+				<xs:sequence>
+					<xs:element name="EducationSourceRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdmissionCondition">
+				<xs:sequence>
+					<xs:element name="ConditionTypeRef" type="ns1:ReferenceType"/>
+					<xs:element name="ConditionRef" type="ns1:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Speciality">
+				<xs:sequence>
+					<xs:element name="ApplicationStringGUID" type="xs:string"/>
+					<xs:element name="CompetitiveGroupRef" type="ns1:ReferenceType"/>
+					<xs:element name="DirectionRef" type="ns1:ReferenceType"/>
+					<xs:element name="CurriculumRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationLevelRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationFormRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationProgramRef" type="ns1:ReferenceType"/>
+					<xs:element name="EducationSourceRef" type="ns1:ReferenceType"/>
+					<xs:element name="LevelBudgetRef" type="ns1:ReferenceType"/>
+					<xs:element name="UGSRef" type="ns1:ReferenceType"/>
+					<xs:element name="BranchRef" type="ns1:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdmissionConditionGroup">
+				<xs:sequence>
+					<xs:element name="AdmissionConditionGroupRef" type="ns1:ReferenceType" nillable="true"/>
+					<xs:element name="AdmissionConditions" type="tns:AdmissionCondition" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetSeparateQuotaAdmissionProcedures">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="SeparateQuotaAdmissionProcedures" type="tns:SeparateQuotaAdmissionProcedure" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="SeparateQuotaAdmissionProcedure">
+				<xs:sequence>
+					<xs:element name="SpecialMarkRef" type="ns1:ReferenceType"/>
+					<xs:element name="WithoutEntranceExams" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAdmissionConditionGroups">
+				<xs:sequence>
+					<xs:element name="AdmissionConditionGroups" type="tns:AdmissionConditionGroup" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetOlympicInfo">
+				<xs:sequence>
+					<xs:element name="OlympicInfo" type="tns:OlympicInfo" maxOccurs="unbounded"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="OlympicInfo">
+				<xs:sequence>
+					<xs:element name="OlympicRef" type="ns1:ReferenceType"/>
+					<xs:element name="SpecialMarkRef" type="ns1:ReferenceType"/>
+					<xs:element name="VariantOfRetestRef" type="ns1:ReferenceType"/>
+					<xs:element name="CurriculumRefs" type="ns1:ReferenceType" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="ns1:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="OlympicsRefs">
+				<xs:sequence>
+					<xs:element name="OlympicRef" type="ns1:ReferenceType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</types>
+	<message name="GetEntrantPackageRequestMessage">
+		<part name="parameters" element="tns:GetEntrantPackage"/>
+	</message>
+	<message name="GetEntrantPackageResponseMessage">
+		<part name="parameters" element="tns:GetEntrantPackageResponse"/>
+	</message>
+	<message name="PostEntrantPackageRequestMessage">
+		<part name="parameters" element="tns:PostEntrantPackage"/>
+	</message>
+	<message name="PostEntrantPackageResponseMessage">
+		<part name="parameters" element="tns:PostEntrantPackageResponse"/>
+	</message>
+	<message name="TestConnectionRequestMessage">
+		<part name="parameters" element="tns:TestConnection"/>
+	</message>
+	<message name="TestConnectionResponseMessage">
+		<part name="parameters" element="tns:TestConnectionResponse"/>
+	</message>
+	<message name="GetApplicationReportRequestMessage">
+		<part name="parameters" element="tns:GetApplicationReport"/>
+	</message>
+	<message name="GetApplicationReportResponseMessage">
+		<part name="parameters" element="tns:GetApplicationReportResponse"/>
+	</message>
+	<message name="PutFilePartRequestMessage">
+		<part name="parameters" element="tns:PutFilePart"/>
+	</message>
+	<message name="PutFilePartResponseMessage">
+		<part name="parameters" element="tns:PutFilePartResponse"/>
+	</message>
+	<message name="GetFilesListRequestMessage">
+		<part name="parameters" element="tns:GetFilesList"/>
+	</message>
+	<message name="GetFilesListResponseMessage">
+		<part name="parameters" element="tns:GetFilesListResponse"/>
+	</message>
+	<message name="PostFilesListRequestMessage">
+		<part name="parameters" element="tns:PostFilesList"/>
+	</message>
+	<message name="PostFilesListResponseMessage">
+		<part name="parameters" element="tns:PostFilesListResponse"/>
+	</message>
+	<message name="GetFilePartRequestMessage">
+		<part name="parameters" element="tns:GetFilePart"/>
+	</message>
+	<message name="GetFilePartResponseMessage">
+		<part name="parameters" element="tns:GetFilePartResponse"/>
+	</message>
+	<message name="GetDocumentsReturnFormRequestMessage">
+		<part name="parameters" element="tns:GetDocumentsReturnForm"/>
+	</message>
+	<message name="GetDocumentsReturnFormResponseMessage">
+		<part name="parameters" element="tns:GetDocumentsReturnFormResponse"/>
+	</message>
+	<message name="GetInterfaceVersionsRequestMessage">
+		<part name="parameters" element="tns:GetInterfaceVersions"/>
+	</message>
+	<message name="GetInterfaceVersionsResponseMessage">
+		<part name="parameters" element="tns:GetInterfaceVersionsResponse"/>
+	</message>
+	<message name="GetInterfaceVersionRequestMessage">
+		<part name="parameters" element="tns:GetInterfaceVersion"/>
+	</message>
+	<message name="GetInterfaceVersionResponseMessage">
+		<part name="parameters" element="tns:GetInterfaceVersionResponse"/>
+	</message>
+	<message name="GetEntrantProfilePackageRequestMessage">
+		<part name="parameters" element="tns:GetEntrantProfilePackage"/>
+	</message>
+	<message name="GetEntrantProfilePackageResponseMessage">
+		<part name="parameters" element="tns:GetEntrantProfilePackageResponse"/>
+	</message>
+	<message name="GetAbiturientCampaignsRequestMessage">
+		<part name="parameters" element="tns:GetAbiturientCampaigns"/>
+	</message>
+	<message name="GetAbiturientCampaignsResponseMessage">
+		<part name="parameters" element="tns:GetAbiturientCampaignsResponse"/>
+	</message>
+	<portType name="WebApplicationPortType">
+		<operation name="GetEntrantPackage">
+			<input message="tns:GetEntrantPackageRequestMessage"/>
+			<output message="tns:GetEntrantPackageResponseMessage"/>
+		</operation>
+		<operation name="PostEntrantPackage">
+			<input message="tns:PostEntrantPackageRequestMessage"/>
+			<output message="tns:PostEntrantPackageResponseMessage"/>
+		</operation>
+		<operation name="TestConnection">
+			<input message="tns:TestConnectionRequestMessage"/>
+			<output message="tns:TestConnectionResponseMessage"/>
+		</operation>
+		<operation name="GetApplicationReport">
+			<input message="tns:GetApplicationReportRequestMessage"/>
+			<output message="tns:GetApplicationReportResponseMessage"/>
+		</operation>
+		<operation name="PutFilePart">
+			<input message="tns:PutFilePartRequestMessage"/>
+			<output message="tns:PutFilePartResponseMessage"/>
+		</operation>
+		<operation name="GetFilesList">
+			<input message="tns:GetFilesListRequestMessage"/>
+			<output message="tns:GetFilesListResponseMessage"/>
+		</operation>
+		<operation name="PostFilesList">
+			<input message="tns:PostFilesListRequestMessage"/>
+			<output message="tns:PostFilesListResponseMessage"/>
+		</operation>
+		<operation name="GetFilePart">
+			<input message="tns:GetFilePartRequestMessage"/>
+			<output message="tns:GetFilePartResponseMessage"/>
+		</operation>
+		<operation name="GetDocumentsReturnForm">
+			<input message="tns:GetDocumentsReturnFormRequestMessage"/>
+			<output message="tns:GetDocumentsReturnFormResponseMessage"/>
+		</operation>
+		<operation name="GetInterfaceVersions">
+			<input message="tns:GetInterfaceVersionsRequestMessage"/>
+			<output message="tns:GetInterfaceVersionsResponseMessage"/>
+		</operation>
+		<operation name="GetInterfaceVersion">
+			<input message="tns:GetInterfaceVersionRequestMessage"/>
+			<output message="tns:GetInterfaceVersionResponseMessage"/>
+		</operation>
+		<operation name="GetEntrantProfilePackage">
+			<input message="tns:GetEntrantProfilePackageRequestMessage"/>
+			<output message="tns:GetEntrantProfilePackageResponseMessage"/>
+		</operation>
+		<operation name="GetAbiturientCampaigns">
+			<input message="tns:GetAbiturientCampaignsRequestMessage"/>
+			<output message="tns:GetAbiturientCampaignsResponseMessage"/>
+		</operation>
+	</portType>
+	<binding name="WebApplicationSoapBinding" type="tns:WebApplicationPortType">
+		<soapbind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetEntrantPackage">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetEntrantPackage"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PostEntrantPackage">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:PostEntrantPackage"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="TestConnection">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:TestConnection"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetApplicationReport">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetApplicationReport"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PutFilePart">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:PutFilePart"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetFilesList">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetFilesList"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PostFilesList">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:PostFilesList"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetFilePart">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetFilePart"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetDocumentsReturnForm">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetDocumentsReturnForm"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersions">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetInterfaceVersions"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersion">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetInterfaceVersion"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEntrantProfilePackage">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetEntrantProfilePackage"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCampaigns">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetAbiturientCampaigns"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<binding name="WebApplicationSoap12Binding" type="tns:WebApplicationPortType">
+		<soap12bind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetEntrantPackage">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetEntrantPackage"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PostEntrantPackage">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:PostEntrantPackage"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="TestConnection">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:TestConnection"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetApplicationReport">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetApplicationReport"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PutFilePart">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:PutFilePart"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetFilesList">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetFilesList"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PostFilesList">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:PostFilesList"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetFilePart">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetFilePart"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetDocumentsReturnForm">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetDocumentsReturnForm"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersions">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetInterfaceVersions"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersion">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetInterfaceVersion"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEntrantProfilePackage">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetEntrantProfilePackage"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCampaigns">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/application#WebApplication:GetAbiturientCampaigns"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="WebApplication">
+		<port name="WebApplicationSoap" binding="tns:WebApplicationSoapBinding">
+			<documentation> 
+				<wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" conformsTo="http://ws-i.org/profiles/basic/1.1"/>
+			</documentation>
+			<soapbind:address location="http://localhost/testun/ws/webapplication.1cws"/>
+		</port>
+		<port name="WebApplicationSoap12" binding="tns:WebApplicationSoap12Binding">
+			<soap12bind:address location="http://localhost/testun/ws/webapplication.1cws"/>
+		</port>
+	</service>
+</definitions>

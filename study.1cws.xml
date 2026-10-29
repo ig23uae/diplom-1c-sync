@@ -1,0 +1,2368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://sgu-infocom.ru/study" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://sgu-infocom.ru/common" xmlns:xsd2="http://sgu-infocom.ru/study" name="WebStudy" targetNamespace="http://sgu-infocom.ru/study">
+	<types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xs1="http://sgu-infocom.ru/study" xmlns:xs2="http://sgu-infocom.ru/common" targetNamespace="http://sgu-infocom.ru/study" attributeFormDefault="unqualified" elementFormDefault="qualified">
+			<xs:import namespace="http://sgu-infocom.ru/common"/>
+			<xs:simpleType name="AcademicGroupCompoundKeyType">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="AcademicGroupNameType">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="ClassroomUIDType">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="ComparisonType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="InList"/>
+					<xs:enumeration value="InHierarchy"/>
+					<xs:enumeration value="Like"/>
+					<xs:enumeration value="Equal"/>
+					<xs:enumeration value="NotEqual"/>
+					<xs:enumeration value="Less"/>
+					<xs:enumeration value="Greater"/>
+					<xs:enumeration value="LessOrEqual"/>
+					<xs:enumeration value="GreaterOrEqual"/>
+					<xs:enumeration value="NotInList"/>
+					<xs:enumeration value="NotInHierarchy"/>
+					<xs:enumeration value="NotLike"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="CurriculumIdType">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="CurriculumNameType">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="GroupTypeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="NoGroup"/>
+					<xs:enumeration value="Table"/>
+					<xs:enumeration value="Group"/>
+					<xs:enumeration value="Page"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="LogicalOperatorType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="And"/>
+					<xs:enumeration value="Or"/>
+					<xs:enumeration value="Not"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="Login">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="OrderInfoType">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="PasswordHash">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="RecordbookIdType">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="ResultType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Success"/>
+					<xs:enumeration value="Fail"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="RoleType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Student"/>
+					<xs:enumeration value="Teacher"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="ScheduleObjectType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="AcademicGroup"/>
+					<xs:enumeration value="Teacher"/>
+					<xs:enumeration value="Classroom"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="ScheduleType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Week"/>
+					<xs:enumeration value="Full"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="TeacherIdType">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="TermIdType">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="TermNameType">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:simpleType name="TextFilterType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Disabled"/>
+					<xs:enumeration value="AnyPosition"/>
+					<xs:enumeration value="BeginningOfLine"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="UserId">
+				<xs:restriction base="xs:string"/>
+			</xs:simpleType>
+			<xs:complexType name="AcademicGroup">
+				<xs:sequence>
+					<xs:element name="AcademicGroupCompoundKey" type="tns:AcademicGroupCompoundKeyType"/>
+					<xs:element name="AcademicGroupName" type="tns:AcademicGroupNameType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AttachedFileType">
+				<xs:sequence>
+					<xs:element name="Ref" type="tns:ReferenceType"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="Description" type="xs:string"/>
+					<xs:element name="Size" type="xs:int"/>
+					<xs:element name="Extension" type="xs:string"/>
+					<xs:element name="DiskStorage" type="xs:boolean"/>
+					<xs:element name="FilePathInVolume" type="xs:string"/>
+					<xs:element name="VolumePathLinux" type="xs:string"/>
+					<xs:element name="VolumePathWindows" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Authorization">
+				<xs:sequence>
+					<xs:element name="User" type="tns:User" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="BinaryFileType">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="Description" type="xs:string"/>
+					<xs:element name="Size" type="xs:int"/>
+					<xs:element name="Extension" type="xs:string"/>
+					<xs:element name="Data" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ChangeLoginPassword">
+				<xs:sequence>
+					<xs:element name="User" type="tns:User" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Classroom">
+				<xs:sequence>
+					<xs:element name="ClassroomUID" type="tns:ClassroomUIDType"/>
+					<xs:element name="ClassroomName" type="xs:string"/>
+					<xs:element name="Address" type="xs:string" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ColumnType">
+				<xs:sequence>
+					<xs:element name="LapResultProperty" type="tns:LapResultPropretiesType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CommentaryResponse">
+				<xs:sequence>
+					<xs:element name="CommentaryStrings" type="tns:CommentaryType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CommentaryType">
+				<xs:sequence>
+					<xs:element name="Period" type="xs:dateTime"/>
+					<xs:element name="Author" type="tns:ReferenceType"/>
+					<xs:element name="Text" type="xs:string"/>
+					<xs:element name="UIDCommentary" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Competence">
+				<xs:sequence>
+					<xs:element name="CompetenceCode" type="xs:string"/>
+					<xs:element name="Competence" type="tns:ReferenceType"/>
+					<xs:element name="Subjects" type="tns:CompetenceSubjects"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CompetenceSubjects">
+				<xs:sequence>
+					<xs:element name="SubjectCompetenceInfo" type="tns:SubjectCompetenceInfo" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CompositeType">
+				<xs:sequence>
+					<xs:element name="ValueType" type="xs:string"/>
+					<xs:element name="Value" nillable="true" minOccurs="0"/>
+					<xs:element name="ValueRef" type="tns:ReferenceType" nillable="true" minOccurs="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CourseUnitType">
+				<xs:sequence>
+					<xs:element name="CourseUnitId" type="xs:string"/>
+					<xs:element name="CourseUnitName" type="xs:string"/>
+					<xs:element name="MaxCount" type="xs:integer"/>
+					<xs:element name="Variable" type="xs:boolean" nillable="true"/>
+					<xs:element name="SubjectsString" type="tns:Subjects"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CourseUnits">
+				<xs:sequence>
+					<xs:element name="CourseUnit" type="tns:CourseUnitType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CreateIndividualResult">
+				<xs:sequence>
+					<xs:element name="Result" type="tns:ResultType"/>
+					<xs:element name="Error" type="tns:Error" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Curriculum">
+				<xs:sequence>
+					<xs:element name="CurriculumId" type="tns:CurriculumIdType"/>
+					<xs:element name="CurriculumName" type="tns:CurriculumNameType"/>
+					<xs:element name="CurriculumRef" type="tns:ReferenceType"/>
+					<xs:element name="SpecialtyName" type="xs:string"/>
+					<xs:element name="FormsOfEducationName"/>
+					<xs:element name="DepartmentName" type="xs:string"/>
+					<xs:element name="LevelOfEducationName"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CurriculumLoad">
+				<xs:sequence>
+					<xs:element name="Subject" type="xs:string"/>
+					<xs:element name="Term" type="xs:string"/>
+					<xs:element name="LoadType" type="xs:string"/>
+					<xs:element name="Amount" type="xs:float"/>
+					<xs:element name="Unit" type="xs:string"/>
+					<xs:element name="IsControl" type="xs:boolean"/>
+					<xs:element name="UMKOwnerId" nillable="true"/>
+					<xs:element name="UMKOwnerType" nillable="true"/>
+					<xs:element name="PropertiesUMK" type="tns:PropertyType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DaySchedule">
+				<xs:sequence>
+					<xs:element name="Date" type="xs:date"/>
+					<xs:element name="DayOfWeek" type="xs:string"/>
+					<xs:element name="ScheduleCell" type="tns:ScheduleCell" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EmployerState">
+				<xs:sequence>
+					<xs:element name="DepartmentRef" type="tns:ReferenceType"/>
+					<xs:element name="PositionRef" type="tns:ReferenceType"/>
+					<xs:element name="JobRateRef" type="tns:ReferenceType"/>
+					<xs:element name="EmploymentType" type="tns:ReferenceType"/>
+					<xs:element name="JobDescription" type="xs:string"/>
+					<xs:element name="YearRef" type="tns:ReferenceType"/>
+					<xs:element name="PropertyEmployerState" type="tns:PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="EmployerRef" type="tns:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Error">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:int"/>
+					<xs:element name="Description" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FilterType">
+				<xs:sequence>
+					<xs:element name="Field" type="xs:string"/>
+					<xs:element name="Comparison" type="tns:ComparisonType"/>
+					<xs:element name="Values" type="tns:CompositeType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FiltersType">
+				<xs:sequence>
+					<xs:element name="Operator" type="tns:LogicalOperatorType" nillable="true" minOccurs="0"/>
+					<xs:element name="SimpleFilters" type="tns:FilterType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="InsertedFilters" type="tns:FiltersType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllCurriculums">
+				<xs:sequence>
+					<xs:element name="Curriculum" type="tns:Curriculum" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAttachedFileList">
+				<xs:sequence>
+					<xs:element name="AttachedFile" type="tns:AttachedFileType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetCourseGraduateWorks">
+				<xs:sequence>
+					<xs:element name="ThemeRecord" type="tns:ThemeRecord" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetCurriculumLoad">
+				<xs:sequence>
+					<xs:element name="CurriculumLoad" type="tns:CurriculumLoad" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetCurriculumPerfomanceResponse">
+				<xs:sequence>
+					<xs:element name="Competencies" type="tns:Competence" nillable="true" maxOccurs="unbounded"/>
+					<xs:element name="SubjectsLegend" type="tns:SubjectsLegend"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetCurriculumTerms">
+				<xs:sequence>
+					<xs:element name="Term" type="tns:Term" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetEducationalPerformance">
+				<xs:sequence>
+					<xs:element name="MarkRecord" type="tns:MarkRecord" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetEmployerStatesResponse">
+				<xs:sequence>
+					<xs:element name="EmployerState" type="tns:EmployerState" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetEmployerUMKResponse">
+				<xs:sequence>
+					<xs:element name="UMKStrings" type="tns:UMKType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetOrders">
+				<xs:sequence>
+					<xs:element name="OrdersInfo" type="tns:OrderInfo" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetRecordbooks">
+				<xs:sequence>
+					<xs:element name="Recordbook" type="tns:Recordbook" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetReferenceResponse">
+				<xs:sequence>
+					<xs:element name="Reference" type="tns:ReferenceType"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetReferencesResponse">
+				<xs:sequence>
+					<xs:element name="References" type="tns:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Overflow" type="xs:boolean"/>
+					<xs:element name="AllRowsCount" type="xs:int"/>
+					<xs:element name="ShowedRowsCount" type="xs:int"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetSchedule">
+				<xs:sequence>
+					<xs:element name="ProjectSchedule" type="tns:ProjectSchedule" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Week" type="tns:WeekSchedule" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="OwnerRef" type="tns:ReferenceType" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetStudentStipends">
+				<xs:sequence>
+					<xs:element name="StipendRecord" type="tns:StipendRecord" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetUsers">
+				<xs:sequence>
+					<xs:element name="User" type="tns:User" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GroupType">
+				<xs:sequence>
+					<xs:element name="Rows" type="tns:RowType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="LapResultClasses">
+				<xs:sequence>
+					<xs:element name="LapResultClass" type="tns:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="LapResultPropretiesType">
+				<xs:sequence>
+					<xs:element name="LineNumber" type="xs:int"/>
+					<xs:element name="Property" type="tns:ReferenceType"/>
+					<xs:element name="Description" type="xs:string"/>
+					<xs:element name="ValueType" type="xs:string"/>
+					<xs:element name="ValueRef" type="tns:ReferenceType" minOccurs="0"/>
+					<xs:element name="Value" type="xs:string" minOccurs="0"/>
+					<xs:element name="Attributes" type="tns:LapResultPropretiyAttributesType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="ActualAttributes" type="tns:LapResultPropretiyAttributesType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Filters" type="tns:FiltersType"/>
+					<xs:element name="GroupType" type="tns:GroupTypeType" nillable="true" minOccurs="0"/>
+					<xs:element name="Group" type="tns:GroupType" nillable="true" minOccurs="0"/>
+					<xs:element name="MaxLength" type="xs:int" nillable="true" default="0"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="LapResultPropretiyAttributesType">
+				<xs:sequence>
+					<xs:element name="PropertyАttributeName" type="xs:string"/>
+					<xs:element name="PropertyАttributeValue" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="LapResultType">
+				<xs:sequence>
+					<xs:element name="ResultTypeName" type="xs:string"/>
+					<xs:element name="ResultForm" type="tns:ReferenceType"/>
+					<xs:element name="ResultId" type="xs:int"/>
+					<xs:element name="Result" type="tns:ReferenceType"/>
+					<xs:element name="Status" type="tns:ReferenceType" minOccurs="0"/>
+					<xs:element name="Mark" type="tns:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="Statement" type="tns:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="Empty" type="xs:boolean"/>
+					<xs:element name="LapResultProperties" type="tns:LapResultPropretiesType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Teachers" type="tns:TeacherEmployer" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="LapResults">
+				<xs:sequence>
+					<xs:element name="LapResultStrings" type="tns:LapResultType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Lesson">
+				<xs:sequence>
+					<xs:element name="LessonCompoundKey" type="xs:string"/>
+					<xs:element name="Subject" type="xs:string"/>
+					<xs:element name="LessonType" type="xs:string"/>
+					<xs:element name="Teacher" type="tns:Teacher" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Classroom" type="tns:Classroom" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AcademicGroup" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="DateBeginReal" type="xs:dateTime"/>
+					<xs:element name="DateEndReal" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="MarkRecord">
+				<xs:sequence>
+					<xs:element name="Block" type="xs:string"/>
+					<xs:element name="Subject" type="xs:string"/>
+					<xs:element name="Date" type="xs:dateTime"/>
+					<xs:element name="Term" type="xs:string"/>
+					<xs:element name="Unit" type="xs:string"/>
+					<xs:element name="Mark" type="xs:string"/>
+					<xs:element name="Credits" type="xs:float"/>
+					<xs:element name="Theme" type="xs:string"/>
+					<xs:element name="ClassroomLoad" type="xs:float"/>
+					<xs:element name="TotalLoad" type="xs:float"/>
+					<xs:element name="TypeOfTheControl" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="OperationResponse">
+				<xs:sequence>
+					<xs:element name="Result" type="tns:ResultType"/>
+					<xs:element name="Error" type="tns:Error" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="OrderInfo">
+				<xs:sequence>
+					<xs:element name="OrderInfo" type="tns:OrderInfoType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PlanTree">
+				<xs:sequence>
+					<xs:element name="OwnerId" type="xs:string"/>
+					<xs:element name="PlanTreeStrings" type="tns:PlanTreeType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PlanTreeType">
+				<xs:sequence>
+					<xs:element name="Plan" type="tns:ReferenceType"/>
+					<xs:element name="LapName" type="xs:string"/>
+					<xs:element name="LapUID"/>
+					<xs:element name="LapParentUID"/>
+					<xs:element name="CategoryActivity" type="tns:ReferenceType"/>
+					<xs:element name="LapStrings" type="tns:PlanTreeType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ProjectSchedule">
+				<xs:sequence>
+					<xs:element name="Project" type="tns:ReferenceType"/>
+					<xs:element name="Day" type="tns:DaySchedule" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Properties">
+				<xs:sequence>
+					<xs:element name="PropertyStrings" type="tns:PropertyType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PropertyType">
+				<xs:sequence>
+					<xs:element name="Property" type="tns:ReferenceType"/>
+					<xs:element name="Value" type="tns:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Recordbook">
+				<xs:sequence>
+					<xs:element name="RecordbookId" type="tns:RecordbookIdType"/>
+					<xs:element name="RecordbookName" type="xs:string"/>
+					<xs:element name="CurriculumId" type="tns:CurriculumIdType"/>
+					<xs:element name="CurriculumName" type="tns:CurriculumNameType"/>
+					<xs:element name="AcademicGroupCompoundKey" type="tns:AcademicGroupCompoundKeyType"/>
+					<xs:element name="AcademicGroupName" type="tns:AcademicGroupNameType"/>
+					<xs:element name="SpecialtyName" type="xs:string"/>
+					<xs:element name="FormsOfEducationName"/>
+					<xs:element name="StateName" type="xs:string"/>
+					<xs:element name="PropertyRecordBook" type="tns:PropertyType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReferenceType">
+				<xs:sequence>
+					<xs:element name="ReferenceName" type="xs:string"/>
+					<xs:element name="ReferenceId" type="xs:string"/>
+					<xs:element name="ReferenceUID" type="xs:string"/>
+					<xs:element name="ReferenceClassName"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReferencesType">
+				<xs:sequence>
+					<xs:element name="References" type="tns:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Role">
+				<xs:sequence>
+					<xs:element name="Role" type="tns:RoleType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="RowType">
+				<xs:sequence>
+					<xs:element name="RowNumber" type="xs:integer"/>
+					<xs:element name="Columns" type="tns:LapResultPropretiesType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ScheduleCell">
+				<xs:sequence>
+					<xs:element name="DateBegin" type="xs:dateTime"/>
+					<xs:element name="DateEnd" type="xs:dateTime"/>
+					<xs:element name="Lesson" type="tns:Lesson" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="StipendRecord">
+				<xs:sequence>
+					<xs:element name="OrderNumber" type="xs:string"/>
+					<xs:element name="OrderDate" type="xs:dateTime"/>
+					<xs:element name="Order" type="tns:ReferenceType"/>
+					<xs:element name="OrderType" type="tns:ReferenceType"/>
+					<xs:element name="ProtocolNumber" type="xs:string"/>
+					<xs:element name="ProtocolDate" type="xs:dateTime"/>
+					<xs:element name="Protocol" type="tns:ReferenceType"/>
+					<xs:element name="Calculation" type="tns:ReferenceType"/>
+					<xs:element name="PaymentAmount" type="xs:string"/>
+					<xs:element name="StartDate" type="xs:dateTime"/>
+					<xs:element name="EndDate" type="xs:dateTime"/>
+					<xs:element name="FormOfEducation" type="tns:ReferenceType"/>
+					<xs:element name="Faculty" type="tns:ReferenceType"/>
+					<xs:element name="Specialty" type="tns:ReferenceType"/>
+					<xs:element name="Course" type="tns:ReferenceType"/>
+					<xs:element name="StudyGroup" type="tns:ReferenceType"/>
+					<xs:element name="Subgroup" type="tns:ReferenceType"/>
+					<xs:element name="CommissionDecision" type="tns:ReferenceType"/>
+					<xs:element name="Cause" type="tns:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="StudentsList">
+				<xs:sequence>
+					<xs:element name="Student" type="tns:ReferenceType"/>
+					<xs:element name="RecordBook" type="tns:Recordbook" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="StudentsListResponse">
+				<xs:sequence>
+					<xs:element name="StudentList" type="tns:StudentsList" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Overflow" type="xs:boolean"/>
+					<xs:element name="AllRowsCount" type="xs:int"/>
+					<xs:element name="ShowedRowsCount" type="xs:int"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="SubjectCompetenceInfo">
+				<xs:sequence>
+					<xs:element name="Subject" type="tns:ReferenceType"/>
+					<xs:element name="Percent" type="xs:float"/>
+					<xs:element name="Completed" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="SubjectType">
+				<xs:sequence>
+					<xs:element name="CurriculumId" type="xs:string"/>
+					<xs:element name="SubjectId" type="xs:string"/>
+					<xs:element name="SubjectName" type="xs:string"/>
+					<xs:element name="CourseUnitId" type="xs:string"/>
+					<xs:element name="CourseUnitName" type="xs:string"/>
+					<xs:element name="Variable" type="xs:boolean" nillable="true"/>
+					<xs:element name="Checked" type="xs:boolean" nillable="true"/>
+					<xs:element name="SaveChecked" type="xs:boolean" nillable="true"/>
+					<xs:element name="DefaultChecked" type="xs:boolean" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Subjects">
+				<xs:sequence>
+					<xs:element name="Subject" type="tns:SubjectType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="SubjectsLegend">
+				<xs:sequence>
+					<xs:element name="Subject" type="tns:ReferenceType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Teacher">
+				<xs:sequence>
+					<xs:element name="TeacherId" type="tns:TeacherIdType"/>
+					<xs:element name="TeacherName" type="xs:string"/>
+					<xs:element name="EmployerRef" type="tns:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Term">
+				<xs:sequence>
+					<xs:element name="TermId" type="tns:TermIdType"/>
+					<xs:element name="TermName" type="tns:TermNameType"/>
+					<xs:element name="TermNumber" type="xs:int"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ThemeRecord">
+				<xs:sequence>
+					<xs:element name="Subject" type="tns:ReferenceType"/>
+					<xs:element name="Term" type="tns:ReferenceType"/>
+					<xs:element name="Theme" type="xs:string"/>
+					<xs:element name="TypeOfTheControl" type="tns:ReferenceType"/>
+					<xs:element name="Teacher" type="tns:ReferenceType"/>
+					<xs:element name="OrderDate" type="xs:dateTime"/>
+					<xs:element name="OrderNumber" type="xs:string"/>
+					<xs:element name="StartDate" type="xs:dateTime"/>
+					<xs:element name="OrderRef" type="tns:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="UMKType">
+				<xs:sequence>
+					<xs:element name="PropertiesUMK" type="tns:PropertyType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="User">
+				<xs:sequence>
+					<xs:element name="UserId" type="tns:UserId"/>
+					<xs:element name="Login" type="tns:Login"/>
+					<xs:element name="PasswordHash" type="tns:PasswordHash"/>
+					<xs:element name="Roles" type="tns:Role" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="UserRef" type="tns:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="WeekSchedule">
+				<xs:sequence>
+					<xs:element name="DateBegin" type="xs:dateTime"/>
+					<xs:element name="DateEnd" type="xs:dateTime"/>
+					<xs:element name="ProjectSchedule" type="tns:ProjectSchedule" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TeacherEmployer">
+				<xs:sequence>
+					<xs:element name="EmployerRef" type="tns:ReferenceType"/>
+					<xs:element name="PositionRef" type="tns:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="GetUsers">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetUsersResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetUsers"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Authorization">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UserId" type="tns:UserId"/>
+						<xs:element name="Login" type="tns:Login" nillable="true"/>
+						<xs:element name="PasswordHash" type="tns:PasswordHash"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AuthorizationResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:Authorization"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ChangeLoginPassword">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UserId" type="tns:UserId"/>
+						<xs:element name="Login" type="tns:Login" nillable="true"/>
+						<xs:element name="PasswordHash" type="tns:PasswordHash"/>
+						<xs:element name="NewLogin" type="tns:Login" nillable="true"/>
+						<xs:element name="NewPasswordHash" type="tns:PasswordHash" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ChangeLoginPasswordResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:ChangeLoginPassword"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CreateIndividualEducationPredmets">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CourseUnits" type="tns:CourseUnits" nillable="true"/>
+						<xs:element name="UserId" type="xs:string"/>
+						<xs:element name="RecordbookId" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CreateIndividualEducationPredmetsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:CreateIndividualResult"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetOrders">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UserId" type="tns:UserId"/>
+						<xs:element name="RecordbookId" type="tns:RecordbookIdType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetOrdersResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetOrders"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetRecordbooks">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UserId" type="tns:UserId"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetRecordbooksResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetRecordbooks" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEducationalPerformance">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UserId" type="tns:UserId"/>
+						<xs:element name="RecordbookId" type="tns:RecordbookIdType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEducationalPerformanceResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetEducationalPerformance"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetSchedule">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ScheduleObjectType" type="tns:ScheduleObjectType"/>
+						<xs:element name="ScheduleObjectId" type="xs:string"/>
+						<xs:element name="ScheduleType" type="tns:ScheduleType"/>
+						<xs:element name="DateBegin" type="xs:date"/>
+						<xs:element name="DateEnd" type="xs:date"/>
+						<xs:element name="UserRef" type="tns:UserId" nillable="true"/>
+						<xs:element name="RecordbookRef" type="tns:RecordbookIdType" nillable="true"/>
+						<xs:element name="EmployerRef" type="tns:ReferenceType" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetScheduleResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetSchedule"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCurriculumTerms">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CurriculumId" type="tns:CurriculumIdType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCurriculumTermsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetCurriculumTerms"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCurriculumLoad">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CurriculumId" type="tns:CurriculumIdType"/>
+						<xs:element name="TermId" type="tns:TermIdType" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCurriculumLoadResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetCurriculumLoad"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllCurriculums">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllCurriculumsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAllCurriculums"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetIndividualEducationPredmets">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UserId" type="xs:string"/>
+						<xs:element name="RecordbookId" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetIndividualEducationPredmetsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:CourseUnits"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetPlanTree">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="OwnerId" type="xs:string"/>
+						<xs:element name="OwnerType" type="xs:string"/>
+						<xs:element name="OwnerProperties" type="tns:Properties"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetPlanTreeResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:PlanTree"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetLapResults">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PlanUID" type="xs:string"/>
+						<xs:element name="LapUID" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetLapResultsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:LapResults"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetLapResultClasses">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PlanUID" type="xs:string"/>
+						<xs:element name="LapUID" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetLapResultClassesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:LapResultClasses"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetLapResultClassProperties">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PlanUID" type="xs:string"/>
+						<xs:element name="LapUID" type="xs:string"/>
+						<xs:element name="LapResultClassUID" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetLapResultClassPropertiesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:LapResultPropretiesType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SaveLapResult">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PlanUID" type="xs:string"/>
+						<xs:element name="LapUID" type="xs:string"/>
+						<xs:element name="LapResult" type="tns:LapResultType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SaveLapResultResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:OperationResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAttachedFileList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ResultRef" type="tns:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAttachedFileListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAttachedFileList"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetBinaryData">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FileRef" type="tns:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetBinaryDataResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:BinaryFileType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SaveAttachedFile">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ResultRef" type="tns:ReferenceType"/>
+						<xs:element name="BinaryFile" type="tns:BinaryFileType"/>
+						<xs:element name="FileRef" type="tns:ReferenceType" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SaveAttachedFileResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:OperationResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeleteAttachedFile">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ResultRef" type="tns:ReferenceType"/>
+						<xs:element name="FileRef" type="tns:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeleteAttachedFileResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:OperationResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCommentaries">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ObjectRef" type="tns:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCommentariesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:CommentaryResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CreateCommentary">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ObjectRef" type="tns:ReferenceType"/>
+						<xs:element name="Commentary" type="tns:CommentaryType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="CreateCommentaryResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:OperationResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEmployerStates">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PersonRef" type="tns:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEmployerStatesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetEmployerStatesResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEmployersStudents">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EmployerRef" type="tns:ReferenceType"/>
+						<xs:element name="EmployerState" type="tns:EmployerState"/>
+						<xs:element name="CurriculumRef" type="tns:ReferenceType" nillable="true"/>
+						<xs:element name="TextFilterType" type="tns:TextFilterType"/>
+						<xs:element name="Text" type="xs:string" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEmployersStudentsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:StudentsListResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEmployerUMK">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EmployerState" type="tns:EmployerState"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEmployerUMKResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetEmployerUMKResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeleteLapResult">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="PlanUID" type="xs:string"/>
+						<xs:element name="LapUID" type="xs:string"/>
+						<xs:element name="LapResult" type="tns:LapResultType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeleteLapResultResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:OperationResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SaveMark">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Teacher" type="tns:TeacherEmployer"/>
+						<xs:element name="PlanUID" type="xs:string"/>
+						<xs:element name="LapUID" type="xs:string"/>
+						<xs:element name="ResultRef" type="tns:ReferenceType"/>
+						<xs:element name="MarkRef" type="tns:ReferenceType"/>
+						<xs:element name="LessonDate" type="xs:dateTime"/>
+						<xs:element name="StatementRef" type="tns:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SaveMarkResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:OperationResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllowedRatingSystems">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="StatementRef" type="tns:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllowedRatingSystemsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:ReferencesType" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllowedMarks">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="RatingSystemRef" type="tns:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllowedMarksResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:ReferencesType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReference">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Parameter" type="xs:string"/>
+						<xs:element name="ParameterType" type="xs:string"/>
+						<xs:element name="ParameterRef" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReferenceResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetReferenceResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReferences">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ReferenceClassName" type="xs:string"/>
+						<xs:element name="TextFilterType" type="tns:TextFilterType"/>
+						<xs:element name="Text" type="xs:string" nillable="true"/>
+						<xs:element name="Filters" type="tns:FiltersType" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReferencesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetReferencesResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEmployersCurriculums">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EmployerRef" type="tns:ReferenceType"/>
+						<xs:element name="EmployerState" type="tns:EmployerState"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEmployersCurriculumsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAllCurriculums"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCourseGraduateWorks">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UserId" type="tns:UserId"/>
+						<xs:element name="RecordbookId" type="tns:RecordbookIdType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCourseGraduateWorksResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetCourseGraduateWorks"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetStudentStipends">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UserId" type="tns:UserId"/>
+						<xs:element name="RecordbookId" type="tns:RecordbookIdType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetStudentStipendsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetStudentStipends"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCurriculumPerfomance">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="UserId" type="tns:UserId"/>
+						<xs:element name="RecordbookId" type="tns:RecordbookIdType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCurriculumPerfomanceResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetCurriculumPerfomanceResponse" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersions">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersionsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs2:InterfaceVersionsType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersion">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersionResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:tns="http://sgu-infocom.ru/common" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://sgu-infocom.ru/common" attributeFormDefault="unqualified" elementFormDefault="qualified">
+			<xs:complexType name="ReferenceType">
+				<xs:sequence>
+					<xs:element name="ReferenceName" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceId" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceUID" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceClassName" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceParentUID" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceDataVersion" type="xs:string" nillable="true"/>
+					<xs:element name="IsFolder" type="xs:boolean"/>
+					<xs:element name="DeletionMark" type="xs:boolean"/>
+					<xs:element name="Posted" type="xs:boolean"/>
+					<xs:element name="Predefined" type="xs:boolean"/>
+					<xs:element name="PredefinedDataName" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="tns:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InterfaceVersionType">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string" nillable="true"/>
+					<xs:element name="Version" type="xs:string" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InterfaceVersionsType">
+				<xs:sequence>
+					<xs:element name="InterfaceVersion" type="tns:InterfaceVersionType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdditionalElement">
+				<xs:sequence>
+					<xs:element name="ElementName" type="xs:string"/>
+					<xs:element name="ElementValue"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</types>
+	<message name="GetUsersRequestMessage">
+		<part name="parameters" element="tns:GetUsers"/>
+	</message>
+	<message name="GetUsersResponseMessage">
+		<part name="parameters" element="tns:GetUsersResponse"/>
+	</message>
+	<message name="AuthorizationRequestMessage">
+		<part name="parameters" element="tns:Authorization"/>
+	</message>
+	<message name="AuthorizationResponseMessage">
+		<part name="parameters" element="tns:AuthorizationResponse"/>
+	</message>
+	<message name="ChangeLoginPasswordRequestMessage">
+		<part name="parameters" element="tns:ChangeLoginPassword"/>
+	</message>
+	<message name="ChangeLoginPasswordResponseMessage">
+		<part name="parameters" element="tns:ChangeLoginPasswordResponse"/>
+	</message>
+	<message name="CreateIndividualEducationPredmetsRequestMessage">
+		<part name="parameters" element="tns:CreateIndividualEducationPredmets"/>
+	</message>
+	<message name="CreateIndividualEducationPredmetsResponseMessage">
+		<part name="parameters" element="tns:CreateIndividualEducationPredmetsResponse"/>
+	</message>
+	<message name="GetOrdersRequestMessage">
+		<part name="parameters" element="tns:GetOrders"/>
+	</message>
+	<message name="GetOrdersResponseMessage">
+		<part name="parameters" element="tns:GetOrdersResponse"/>
+	</message>
+	<message name="GetRecordbooksRequestMessage">
+		<part name="parameters" element="tns:GetRecordbooks"/>
+	</message>
+	<message name="GetRecordbooksResponseMessage">
+		<part name="parameters" element="tns:GetRecordbooksResponse"/>
+	</message>
+	<message name="GetEducationalPerformanceRequestMessage">
+		<part name="parameters" element="tns:GetEducationalPerformance"/>
+	</message>
+	<message name="GetEducationalPerformanceResponseMessage">
+		<part name="parameters" element="tns:GetEducationalPerformanceResponse"/>
+	</message>
+	<message name="GetScheduleRequestMessage">
+		<part name="parameters" element="tns:GetSchedule"/>
+	</message>
+	<message name="GetScheduleResponseMessage">
+		<part name="parameters" element="tns:GetScheduleResponse"/>
+	</message>
+	<message name="GetCurriculumTermsRequestMessage">
+		<part name="parameters" element="tns:GetCurriculumTerms"/>
+	</message>
+	<message name="GetCurriculumTermsResponseMessage">
+		<part name="parameters" element="tns:GetCurriculumTermsResponse"/>
+	</message>
+	<message name="GetCurriculumLoadRequestMessage">
+		<part name="parameters" element="tns:GetCurriculumLoad"/>
+	</message>
+	<message name="GetCurriculumLoadResponseMessage">
+		<part name="parameters" element="tns:GetCurriculumLoadResponse"/>
+	</message>
+	<message name="GetAllCurriculumsRequestMessage">
+		<part name="parameters" element="tns:GetAllCurriculums"/>
+	</message>
+	<message name="GetAllCurriculumsResponseMessage">
+		<part name="parameters" element="tns:GetAllCurriculumsResponse"/>
+	</message>
+	<message name="GetIndividualEducationPredmetsRequestMessage">
+		<part name="parameters" element="tns:GetIndividualEducationPredmets"/>
+	</message>
+	<message name="GetIndividualEducationPredmetsResponseMessage">
+		<part name="parameters" element="tns:GetIndividualEducationPredmetsResponse"/>
+	</message>
+	<message name="GetPlanTreeRequestMessage">
+		<part name="parameters" element="tns:GetPlanTree"/>
+	</message>
+	<message name="GetPlanTreeResponseMessage">
+		<part name="parameters" element="tns:GetPlanTreeResponse"/>
+	</message>
+	<message name="GetLapResultsRequestMessage">
+		<part name="parameters" element="tns:GetLapResults"/>
+	</message>
+	<message name="GetLapResultsResponseMessage">
+		<part name="parameters" element="tns:GetLapResultsResponse"/>
+	</message>
+	<message name="GetLapResultClassesRequestMessage">
+		<part name="parameters" element="tns:GetLapResultClasses"/>
+	</message>
+	<message name="GetLapResultClassesResponseMessage">
+		<part name="parameters" element="tns:GetLapResultClassesResponse"/>
+	</message>
+	<message name="GetLapResultClassPropertiesRequestMessage">
+		<part name="parameters" element="tns:GetLapResultClassProperties"/>
+	</message>
+	<message name="GetLapResultClassPropertiesResponseMessage">
+		<part name="parameters" element="tns:GetLapResultClassPropertiesResponse"/>
+	</message>
+	<message name="SaveLapResultRequestMessage">
+		<part name="parameters" element="tns:SaveLapResult"/>
+	</message>
+	<message name="SaveLapResultResponseMessage">
+		<part name="parameters" element="tns:SaveLapResultResponse"/>
+	</message>
+	<message name="GetAttachedFileListRequestMessage">
+		<part name="parameters" element="tns:GetAttachedFileList"/>
+	</message>
+	<message name="GetAttachedFileListResponseMessage">
+		<part name="parameters" element="tns:GetAttachedFileListResponse"/>
+	</message>
+	<message name="GetBinaryDataRequestMessage">
+		<part name="parameters" element="tns:GetBinaryData"/>
+	</message>
+	<message name="GetBinaryDataResponseMessage">
+		<part name="parameters" element="tns:GetBinaryDataResponse"/>
+	</message>
+	<message name="SaveAttachedFileRequestMessage">
+		<part name="parameters" element="tns:SaveAttachedFile"/>
+	</message>
+	<message name="SaveAttachedFileResponseMessage">
+		<part name="parameters" element="tns:SaveAttachedFileResponse"/>
+	</message>
+	<message name="DeleteAttachedFileRequestMessage">
+		<part name="parameters" element="tns:DeleteAttachedFile"/>
+	</message>
+	<message name="DeleteAttachedFileResponseMessage">
+		<part name="parameters" element="tns:DeleteAttachedFileResponse"/>
+	</message>
+	<message name="GetCommentariesRequestMessage">
+		<part name="parameters" element="tns:GetCommentaries"/>
+	</message>
+	<message name="GetCommentariesResponseMessage">
+		<part name="parameters" element="tns:GetCommentariesResponse"/>
+	</message>
+	<message name="CreateCommentaryRequestMessage">
+		<part name="parameters" element="tns:CreateCommentary"/>
+	</message>
+	<message name="CreateCommentaryResponseMessage">
+		<part name="parameters" element="tns:CreateCommentaryResponse"/>
+	</message>
+	<message name="GetEmployerStatesRequestMessage">
+		<part name="parameters" element="tns:GetEmployerStates"/>
+	</message>
+	<message name="GetEmployerStatesResponseMessage">
+		<part name="parameters" element="tns:GetEmployerStatesResponse"/>
+	</message>
+	<message name="GetEmployersStudentsRequestMessage">
+		<part name="parameters" element="tns:GetEmployersStudents"/>
+	</message>
+	<message name="GetEmployersStudentsResponseMessage">
+		<part name="parameters" element="tns:GetEmployersStudentsResponse"/>
+	</message>
+	<message name="GetEmployerUMKRequestMessage">
+		<part name="parameters" element="tns:GetEmployerUMK"/>
+	</message>
+	<message name="GetEmployerUMKResponseMessage">
+		<part name="parameters" element="tns:GetEmployerUMKResponse"/>
+	</message>
+	<message name="DeleteLapResultRequestMessage">
+		<part name="parameters" element="tns:DeleteLapResult"/>
+	</message>
+	<message name="DeleteLapResultResponseMessage">
+		<part name="parameters" element="tns:DeleteLapResultResponse"/>
+	</message>
+	<message name="SaveMarkRequestMessage">
+		<part name="parameters" element="tns:SaveMark"/>
+	</message>
+	<message name="SaveMarkResponseMessage">
+		<part name="parameters" element="tns:SaveMarkResponse"/>
+	</message>
+	<message name="GetAllowedRatingSystemsRequestMessage">
+		<part name="parameters" element="tns:GetAllowedRatingSystems"/>
+	</message>
+	<message name="GetAllowedRatingSystemsResponseMessage">
+		<part name="parameters" element="tns:GetAllowedRatingSystemsResponse"/>
+	</message>
+	<message name="GetAllowedMarksRequestMessage">
+		<part name="parameters" element="tns:GetAllowedMarks"/>
+	</message>
+	<message name="GetAllowedMarksResponseMessage">
+		<part name="parameters" element="tns:GetAllowedMarksResponse"/>
+	</message>
+	<message name="GetReferenceRequestMessage">
+		<part name="parameters" element="tns:GetReference"/>
+	</message>
+	<message name="GetReferenceResponseMessage">
+		<part name="parameters" element="tns:GetReferenceResponse"/>
+	</message>
+	<message name="GetReferencesRequestMessage">
+		<part name="parameters" element="tns:GetReferences"/>
+	</message>
+	<message name="GetReferencesResponseMessage">
+		<part name="parameters" element="tns:GetReferencesResponse"/>
+	</message>
+	<message name="GetEmployersCurriculumsRequestMessage">
+		<part name="parameters" element="tns:GetEmployersCurriculums"/>
+	</message>
+	<message name="GetEmployersCurriculumsResponseMessage">
+		<part name="parameters" element="tns:GetEmployersCurriculumsResponse"/>
+	</message>
+	<message name="GetCourseGraduateWorksRequestMessage">
+		<part name="parameters" element="tns:GetCourseGraduateWorks"/>
+	</message>
+	<message name="GetCourseGraduateWorksResponseMessage">
+		<part name="parameters" element="tns:GetCourseGraduateWorksResponse"/>
+	</message>
+	<message name="GetStudentStipendsRequestMessage">
+		<part name="parameters" element="tns:GetStudentStipends"/>
+	</message>
+	<message name="GetStudentStipendsResponseMessage">
+		<part name="parameters" element="tns:GetStudentStipendsResponse"/>
+	</message>
+	<message name="GetCurriculumPerfomanceRequestMessage">
+		<part name="parameters" element="tns:GetCurriculumPerfomance"/>
+	</message>
+	<message name="GetCurriculumPerfomanceResponseMessage">
+		<part name="parameters" element="tns:GetCurriculumPerfomanceResponse"/>
+	</message>
+	<message name="GetInterfaceVersionsRequestMessage">
+		<part name="parameters" element="tns:GetInterfaceVersions"/>
+	</message>
+	<message name="GetInterfaceVersionsResponseMessage">
+		<part name="parameters" element="tns:GetInterfaceVersionsResponse"/>
+	</message>
+	<message name="GetInterfaceVersionRequestMessage">
+		<part name="parameters" element="tns:GetInterfaceVersion"/>
+	</message>
+	<message name="GetInterfaceVersionResponseMessage">
+		<part name="parameters" element="tns:GetInterfaceVersionResponse"/>
+	</message>
+	<portType name="WebStudyPortType">
+		<operation name="GetUsers">
+			<input message="tns:GetUsersRequestMessage"/>
+			<output message="tns:GetUsersResponseMessage"/>
+		</operation>
+		<operation name="Authorization">
+			<input message="tns:AuthorizationRequestMessage"/>
+			<output message="tns:AuthorizationResponseMessage"/>
+		</operation>
+		<operation name="ChangeLoginPassword">
+			<input message="tns:ChangeLoginPasswordRequestMessage"/>
+			<output message="tns:ChangeLoginPasswordResponseMessage"/>
+		</operation>
+		<operation name="CreateIndividualEducationPredmets">
+			<input message="tns:CreateIndividualEducationPredmetsRequestMessage"/>
+			<output message="tns:CreateIndividualEducationPredmetsResponseMessage"/>
+		</operation>
+		<operation name="GetOrders">
+			<input message="tns:GetOrdersRequestMessage"/>
+			<output message="tns:GetOrdersResponseMessage"/>
+		</operation>
+		<operation name="GetRecordbooks">
+			<input message="tns:GetRecordbooksRequestMessage"/>
+			<output message="tns:GetRecordbooksResponseMessage"/>
+		</operation>
+		<operation name="GetEducationalPerformance">
+			<input message="tns:GetEducationalPerformanceRequestMessage"/>
+			<output message="tns:GetEducationalPerformanceResponseMessage"/>
+		</operation>
+		<operation name="GetSchedule">
+			<input message="tns:GetScheduleRequestMessage"/>
+			<output message="tns:GetScheduleResponseMessage"/>
+		</operation>
+		<operation name="GetCurriculumTerms">
+			<input message="tns:GetCurriculumTermsRequestMessage"/>
+			<output message="tns:GetCurriculumTermsResponseMessage"/>
+		</operation>
+		<operation name="GetCurriculumLoad">
+			<input message="tns:GetCurriculumLoadRequestMessage"/>
+			<output message="tns:GetCurriculumLoadResponseMessage"/>
+		</operation>
+		<operation name="GetAllCurriculums">
+			<input message="tns:GetAllCurriculumsRequestMessage"/>
+			<output message="tns:GetAllCurriculumsResponseMessage"/>
+		</operation>
+		<operation name="GetIndividualEducationPredmets">
+			<input message="tns:GetIndividualEducationPredmetsRequestMessage"/>
+			<output message="tns:GetIndividualEducationPredmetsResponseMessage"/>
+		</operation>
+		<operation name="GetPlanTree">
+			<input message="tns:GetPlanTreeRequestMessage"/>
+			<output message="tns:GetPlanTreeResponseMessage"/>
+		</operation>
+		<operation name="GetLapResults">
+			<input message="tns:GetLapResultsRequestMessage"/>
+			<output message="tns:GetLapResultsResponseMessage"/>
+		</operation>
+		<operation name="GetLapResultClasses">
+			<input message="tns:GetLapResultClassesRequestMessage"/>
+			<output message="tns:GetLapResultClassesResponseMessage"/>
+		</operation>
+		<operation name="GetLapResultClassProperties">
+			<input message="tns:GetLapResultClassPropertiesRequestMessage"/>
+			<output message="tns:GetLapResultClassPropertiesResponseMessage"/>
+		</operation>
+		<operation name="SaveLapResult">
+			<input message="tns:SaveLapResultRequestMessage"/>
+			<output message="tns:SaveLapResultResponseMessage"/>
+		</operation>
+		<operation name="GetAttachedFileList">
+			<input message="tns:GetAttachedFileListRequestMessage"/>
+			<output message="tns:GetAttachedFileListResponseMessage"/>
+		</operation>
+		<operation name="GetBinaryData">
+			<input message="tns:GetBinaryDataRequestMessage"/>
+			<output message="tns:GetBinaryDataResponseMessage"/>
+		</operation>
+		<operation name="SaveAttachedFile">
+			<input message="tns:SaveAttachedFileRequestMessage"/>
+			<output message="tns:SaveAttachedFileResponseMessage"/>
+		</operation>
+		<operation name="DeleteAttachedFile">
+			<input message="tns:DeleteAttachedFileRequestMessage"/>
+			<output message="tns:DeleteAttachedFileResponseMessage"/>
+		</operation>
+		<operation name="GetCommentaries">
+			<input message="tns:GetCommentariesRequestMessage"/>
+			<output message="tns:GetCommentariesResponseMessage"/>
+		</operation>
+		<operation name="CreateCommentary">
+			<input message="tns:CreateCommentaryRequestMessage"/>
+			<output message="tns:CreateCommentaryResponseMessage"/>
+		</operation>
+		<operation name="GetEmployerStates">
+			<input message="tns:GetEmployerStatesRequestMessage"/>
+			<output message="tns:GetEmployerStatesResponseMessage"/>
+		</operation>
+		<operation name="GetEmployersStudents">
+			<input message="tns:GetEmployersStudentsRequestMessage"/>
+			<output message="tns:GetEmployersStudentsResponseMessage"/>
+		</operation>
+		<operation name="GetEmployerUMK">
+			<input message="tns:GetEmployerUMKRequestMessage"/>
+			<output message="tns:GetEmployerUMKResponseMessage"/>
+		</operation>
+		<operation name="DeleteLapResult">
+			<input message="tns:DeleteLapResultRequestMessage"/>
+			<output message="tns:DeleteLapResultResponseMessage"/>
+		</operation>
+		<operation name="SaveMark">
+			<input message="tns:SaveMarkRequestMessage"/>
+			<output message="tns:SaveMarkResponseMessage"/>
+		</operation>
+		<operation name="GetAllowedRatingSystems">
+			<input message="tns:GetAllowedRatingSystemsRequestMessage"/>
+			<output message="tns:GetAllowedRatingSystemsResponseMessage"/>
+		</operation>
+		<operation name="GetAllowedMarks">
+			<input message="tns:GetAllowedMarksRequestMessage"/>
+			<output message="tns:GetAllowedMarksResponseMessage"/>
+		</operation>
+		<operation name="GetReference">
+			<input message="tns:GetReferenceRequestMessage"/>
+			<output message="tns:GetReferenceResponseMessage"/>
+		</operation>
+		<operation name="GetReferences">
+			<input message="tns:GetReferencesRequestMessage"/>
+			<output message="tns:GetReferencesResponseMessage"/>
+		</operation>
+		<operation name="GetEmployersCurriculums">
+			<input message="tns:GetEmployersCurriculumsRequestMessage"/>
+			<output message="tns:GetEmployersCurriculumsResponseMessage"/>
+		</operation>
+		<operation name="GetCourseGraduateWorks">
+			<input message="tns:GetCourseGraduateWorksRequestMessage"/>
+			<output message="tns:GetCourseGraduateWorksResponseMessage"/>
+		</operation>
+		<operation name="GetStudentStipends">
+			<input message="tns:GetStudentStipendsRequestMessage"/>
+			<output message="tns:GetStudentStipendsResponseMessage"/>
+		</operation>
+		<operation name="GetCurriculumPerfomance">
+			<input message="tns:GetCurriculumPerfomanceRequestMessage"/>
+			<output message="tns:GetCurriculumPerfomanceResponseMessage"/>
+		</operation>
+		<operation name="GetInterfaceVersions">
+			<input message="tns:GetInterfaceVersionsRequestMessage"/>
+			<output message="tns:GetInterfaceVersionsResponseMessage"/>
+		</operation>
+		<operation name="GetInterfaceVersion">
+			<input message="tns:GetInterfaceVersionRequestMessage"/>
+			<output message="tns:GetInterfaceVersionResponseMessage"/>
+		</operation>
+	</portType>
+	<binding name="WebStudySoapBinding" type="tns:WebStudyPortType">
+		<soapbind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetUsers">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetUsers"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Authorization">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:Authorization"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ChangeLoginPassword">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:ChangeLoginPassword"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="CreateIndividualEducationPredmets">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:CreateIndividualEducationPredmets"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetOrders">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetOrders"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetRecordbooks">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetRecordbooks"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEducationalPerformance">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetEducationalPerformance"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetSchedule">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetSchedule"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCurriculumTerms">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetCurriculumTerms"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCurriculumLoad">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetCurriculumLoad"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllCurriculums">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetAllCurriculums"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetIndividualEducationPredmets">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetIndividualEducationPredmets"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetPlanTree">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetPlanTree"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetLapResults">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetLapResults"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetLapResultClasses">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetLapResultClasses"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetLapResultClassProperties">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetLapResultClassProperties"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="SaveLapResult">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:SaveLapResult"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAttachedFileList">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetAttachedFileList"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetBinaryData">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetBinaryData"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="SaveAttachedFile">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:SaveAttachedFile"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="DeleteAttachedFile">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:DeleteAttachedFile"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCommentaries">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetCommentaries"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="CreateCommentary">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:CreateCommentary"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEmployerStates">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetEmployerStates"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEmployersStudents">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetEmployersStudents"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEmployerUMK">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetEmployerUMK"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="DeleteLapResult">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:DeleteLapResult"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="SaveMark">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:SaveMark"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllowedRatingSystems">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetAllowedRatingSystems"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllowedMarks">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetAllowedMarks"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReference">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetReference"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReferences">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetReferences"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEmployersCurriculums">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetEmployersCurriculums"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCourseGraduateWorks">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetCourseGraduateWorks"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetStudentStipends">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetStudentStipends"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCurriculumPerfomance">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetCurriculumPerfomance"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersions">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetInterfaceVersions"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersion">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetInterfaceVersion"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<binding name="WebStudySoap12Binding" type="tns:WebStudyPortType">
+		<soap12bind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="GetUsers">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetUsers"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="Authorization">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:Authorization"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ChangeLoginPassword">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:ChangeLoginPassword"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="CreateIndividualEducationPredmets">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:CreateIndividualEducationPredmets"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetOrders">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetOrders"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetRecordbooks">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetRecordbooks"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEducationalPerformance">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetEducationalPerformance"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetSchedule">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetSchedule"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCurriculumTerms">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetCurriculumTerms"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCurriculumLoad">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetCurriculumLoad"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllCurriculums">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetAllCurriculums"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetIndividualEducationPredmets">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetIndividualEducationPredmets"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetPlanTree">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetPlanTree"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetLapResults">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetLapResults"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetLapResultClasses">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetLapResultClasses"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetLapResultClassProperties">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetLapResultClassProperties"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="SaveLapResult">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:SaveLapResult"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAttachedFileList">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetAttachedFileList"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetBinaryData">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetBinaryData"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="SaveAttachedFile">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:SaveAttachedFile"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="DeleteAttachedFile">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:DeleteAttachedFile"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCommentaries">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetCommentaries"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="CreateCommentary">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:CreateCommentary"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEmployerStates">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetEmployerStates"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEmployersStudents">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetEmployersStudents"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEmployerUMK">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetEmployerUMK"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="DeleteLapResult">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:DeleteLapResult"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="SaveMark">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:SaveMark"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllowedRatingSystems">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetAllowedRatingSystems"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllowedMarks">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetAllowedMarks"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReference">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetReference"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReferences">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetReferences"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEmployersCurriculums">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetEmployersCurriculums"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCourseGraduateWorks">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetCourseGraduateWorks"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetStudentStipends">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetStudentStipends"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCurriculumPerfomance">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetCurriculumPerfomance"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersions">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetInterfaceVersions"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersion">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru/study#WebStudy:GetInterfaceVersion"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="WebStudy">
+		<port name="WebStudySoap" binding="tns:WebStudySoapBinding">
+			<documentation> 
+				<wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" conformsTo="http://ws-i.org/profiles/basic/1.1"/>
+			</documentation>
+			<soapbind:address location="http://localhost/testun/ws/study.1cws"/>
+		</port>
+		<port name="WebStudySoap12" binding="tns:WebStudySoap12Binding">
+			<soap12bind:address location="http://localhost/testun/ws/study.1cws"/>
+		</port>
+	</service>
+</definitions>

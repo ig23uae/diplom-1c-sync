@@ -1,0 +1,9 @@
+{
+  "base_url": "http://localhost/testun",
+  "database": "data/mirror.sqlite3",
+  "timeout_seconds": 15,
+  "interval_seconds": 300,
+  "jobs": [
+    {"name": "curriculums", "kind": "soap_curriculums", "allow_empty": false}
+  ]
+}

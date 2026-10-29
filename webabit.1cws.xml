@@ -1,0 +1,3300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://sgu-infocom.ru" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsd1="http://sgu-infocom.ru" xmlns:xsd2="http://sgu-infocom.ru/common" name="WebAbit" targetNamespace="http://sgu-infocom.ru">
+	<types>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xs1="http://sgu-infocom.ru" xmlns:xs2="http://sgu-infocom.ru/common" targetNamespace="http://sgu-infocom.ru" attributeFormDefault="unqualified" elementFormDefault="qualified">
+			<xs:import namespace="http://sgu-infocom.ru/common"/>
+			<xs:simpleType name="ApplicationReportType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Application"/>
+					<xs:enumeration value="Agreement"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="AbiturientIdentDocCategory">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Passport"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="TextFilterType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="Disabled"/>
+					<xs:enumeration value="AnyPosition"/>
+					<xs:enumeration value="BeginningOfLine"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="LogicalOperatorType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="And"/>
+					<xs:enumeration value="Or"/>
+					<xs:enumeration value="Not"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="ComparisonType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="InList"/>
+					<xs:enumeration value="InHierarchy"/>
+					<xs:enumeration value="Like"/>
+					<xs:enumeration value="Equal"/>
+					<xs:enumeration value="NotEqual"/>
+					<xs:enumeration value="Less"/>
+					<xs:enumeration value="Greater"/>
+					<xs:enumeration value="LessOrEqual"/>
+					<xs:enumeration value="GreaterOrEqual"/>
+					<xs:enumeration value="NotInList"/>
+					<xs:enumeration value="NotInHierarchy"/>
+					<xs:enumeration value="NotLike"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="ContactInformationType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="RegistrationAddress"/>
+					<xs:enumeration value="ResidenceAddress"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:complexType name="AbitCode">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="DeletionMark" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReceiptStrings">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="StringsPlanPriema" type="tns:StringsPlanPriema"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReceiptString">
+				<xs:sequence>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="SubdivisionRef" type="xs2:ReferenceType"/>
+					<xs:element name="SpecialityCodeOKSO" type="xs:string" nillable="true"/>
+					<xs:element name="DirectionRef" type="xs2:ReferenceType"/>
+					<xs:element name="ProfileRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationLevelRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationFormRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationProgramRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="CompetitiveGroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="DetailGroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="ReceiptAllow" type="xs:boolean"/>
+					<xs:element name="SpecialRight" type="xs:boolean"/>
+					<xs:element name="LevelBudgetRef" type="xs2:ReferenceType"/>
+					<xs:element name="CurriculumRef" type="xs2:ReferenceType"/>
+					<xs:element name="UGSRef" type="xs2:ReferenceType"/>
+					<xs:element name="GraduatingDepartmentRef" type="xs2:ReferenceType"/>
+					<xs:element name="BranchRef" type="xs2:ReferenceType"/>
+					<xs:element name="CombinedCompetitiveGroup" type="xs:boolean"/>
+					<xs:element name="ParentCombinedCompetitiveGroupRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="OnlyForForeignCitizens" type="xs:boolean"/>
+					<xs:element name="OnlyForRussianCitizens" type="xs:boolean"/>
+					<xs:element name="AllowCompatriots" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="StringPlanPriema">
+				<xs:sequence>
+					<xs:element name="Priority" type="xs:long"/>
+					<xs:element name="IdPK" type="xs:string" nillable="true"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="ProfilCode" type="xs:string" nillable="true"/>
+					<xs:element name="ProfileRef" type="xs2:ReferenceType"/>
+					<xs:element name="FinanceCode" type="xs:string"/>
+					<xs:element name="EducationSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="GroupCode" type="xs:string"/>
+					<xs:element name="CompetitiveGroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdmissionCategoryCode" type="xs:string"/>
+					<xs:element name="AdmissionCategoryRef" type="xs2:ReferenceType"/>
+					<xs:element name="PrivilegeCode" type="xs:string"/>
+					<xs:element name="BenefitRef" type="xs2:ReferenceType"/>
+					<xs:element name="SpecialMarkCode" type="xs:string"/>
+					<xs:element name="SpecialMarkRef" type="xs2:ReferenceType"/>
+					<xs:element name="TargetOrganization" type="xs:string"/>
+					<xs:element name="Document" type="tns:Document"/>
+					<xs:element name="BudgetLevelCode" type="xs:string"/>
+					<xs:element name="LevelBudgetRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationDocument" type="tns:EducationDocument"/>
+					<xs:element name="EntranceTests" type="tns:EntranceTestInstance" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="WithoutEntranceExams" type="xs:boolean" nillable="true" minOccurs="0"/>
+					<xs:element name="WithoutEntranceExamsSpecialMarkRef" type="xs2:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="WithoutEntranceExamsSourceDoc" type="tns:Document" nillable="true" minOccurs="0"/>
+					<xs:element name="CurriculumRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CreateApplicationResponse">
+				<xs:sequence>
+					<xs:element name="Complete" type="xs:long"/>
+					<xs:element name="Description" type="xs:string" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="StringsPlanPriema">
+				<xs:sequence>
+					<xs:element name="StringPlanPriema" type="tns:ReceiptString" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetEGEPriema">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Predmet" type="tns:PredmetEGE" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PredmetEGE">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="SubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="IdPK" type="xs:string" nillable="true"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="CompetitiveGroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="IndividualAchievementGroupRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="PointsInGroupAreAwardedOnce" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetPK">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="PK" type="tns:PK" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PK">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="MaximalSpeciality" type="xs:long"/>
+					<xs:element name="MaximalSpecialityType" type="xs:string"/>
+					<xs:element name="CountAllDirectionsSeparatelyOnTargetQuotasRegardlessOfMultiprofileCompetition" type="xs:boolean"/>
+					<xs:element name="Description" type="xs:string"/>
+					<xs:element name="ReceptionAllowed" type="xs:boolean"/>
+					<xs:element name="AddModifyConsentsAllowed" type="xs:boolean"/>
+					<xs:element name="CheckSNILS" type="xs:boolean"/>
+					<xs:element name="IsAllowedMultipleApplicationsToOneGroup" type="xs:boolean"/>
+					<xs:element name="CampaignToken" type="xs:string"/>
+					<xs:element name="RequirePreviousPassports" type="xs:boolean"/>
+					<xs:element name="PriorityConditions" type="tns:PriorityCondition" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="UseCommonAgreements" type="xs:boolean"/>
+					<xs:element name="AgreementConditions" type="tns:AgreementCondition" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AllowMultiplyEducationDocuments" type="xs:boolean"/>
+					<xs:element name="CommonEducationDocument" type="xs:boolean"/>
+					<xs:element name="SeparateSpecialitiesForBudgetAndFullPayment" type="xs:boolean"/>
+					<xs:element name="AllowOriginalFromInformSystem" type="xs:boolean"/>
+					<xs:element name="SeparateAgreementsForBudgetAndFullPayment" type="xs:boolean"/>
+					<xs:element name="EnterFIOInRussianCyrillic" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="UniversalPredmet">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="NeedBlockAndUpdate">
+				<xs:sequence>
+					<xs:element name="Update" type="xs:long" nillable="true"/>
+					<xs:element name="Block" type="xs:long" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetPKInfo">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Stage" type="tns:Stage" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Stage">
+				<xs:sequence>
+					<xs:element name="Finance" type="xs:string"/>
+					<xs:element name="EducationSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationForm" type="xs:string"/>
+					<xs:element name="EducationFormRef" type="xs2:ReferenceType"/>
+					<xs:element name="CategoryCode" type="xs:string"/>
+					<xs:element name="AdmissionCategoryRef" type="xs2:ReferenceType"/>
+					<xs:element name="DetailGroupCode" type="xs:string"/>
+					<xs:element name="DetailGroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="DateStart" type="xs:dateTime"/>
+					<xs:element name="DateFinal" type="xs:dateTime"/>
+					<xs:element name="DateStartOrder" type="xs:date"/>
+					<xs:element name="DateFinalOrder" type="xs:date"/>
+					<xs:element name="CampaignEventPeriods" type="tns:CampaignEventPeriods"/>
+					<xs:element name="EducationLevelRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetMinimalBall">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Exam" type="tns:MinimalBallExam" nillable="true" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="MinimalBallExam">
+				<xs:sequence>
+					<xs:element name="PredmetCode" type="xs:string" nillable="true"/>
+					<xs:element name="PredmetName" type="xs:string" nillable="true"/>
+					<xs:element name="SubjectRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="Form" type="xs:string" nillable="true"/>
+					<xs:element name="FormCode" type="xs:string" nillable="true"/>
+					<xs:element name="EntranceTestResultSourceRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="ChangePredmet" type="xs:string" nillable="true"/>
+					<xs:element name="AlternativeSubjectRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="Ball" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PredmetsPK">
+				<xs:sequence>
+					<xs:element name="Predmet" type="tns:PredmetPK" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PredmetPK">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="ParentPredmet" type="xs:string"/>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="AllowForm" type="tns:Form" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Form">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="ReadOnly" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="UniversalResponse">
+				<xs:sequence>
+					<xs:element name="Complete" type="xs:long"/>
+					<xs:element name="Description" type="xs:string" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbiturientCodeDoublesResponse">
+				<xs:sequence>
+					<xs:element name="AbiturientDoubles" type="tns:AbiturientDouble" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AbiturientDouble">
+				<xs:sequence>
+					<xs:element name="EntrantRef" type="xs2:ReferenceType"/>
+					<xs:element name="Birthdate" type="xs:date"/>
+					<xs:element name="LastName" type="xs:string"/>
+					<xs:element name="FirstName" type="xs:string"/>
+					<xs:element name="SecondName" type="xs:string" nillable="true"/>
+					<xs:element name="PassportSeries" type="xs:string" nillable="true"/>
+					<xs:element name="PassportNumber" type="xs:string" nillable="true"/>
+					<xs:element name="INN" type="xs:string" nillable="true"/>
+					<xs:element name="SNILS" type="xs:string" nillable="true"/>
+					<xs:element name="BirthPlace" type="xs:string" nillable="true"/>
+					<xs:element name="Citizenship" type="xs:string" nillable="true"/>
+					<xs:element name="DeletionMark" type="xs:boolean"/>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllSpecialMarks">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AllSpecialMarks" type="tns:AllSpecialMarks" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AllSpecialMarks">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:string"/>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AllOlympiads">
+				<xs:sequence>
+					<xs:element name="OlympicRef" type="xs2:ReferenceType"/>
+					<xs:element name="Date" type="xs:date"/>
+					<xs:element name="Place" type="xs:string"/>
+					<xs:element name="OlympicTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="OlympicLevelRef" type="xs2:ReferenceType"/>
+					<xs:element name="OlympicKindRef" type="xs2:ReferenceType"/>
+					<xs:element name="OlympicClassRef" type="xs2:ReferenceType"/>
+					<xs:element name="OlympicProfileRef" type="xs2:ReferenceType"/>
+					<xs:element name="ConfirmationEGE" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllOlympiads">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AllOlympiads" type="tns:AllOlympiads" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdmissionProcedures">
+				<xs:sequence>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="FinanceCode" type="xs:string"/>
+					<xs:element name="EducationSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="CategoryCode" type="xs:string"/>
+					<xs:element name="AdmissionCategoryRef" type="xs2:ReferenceType"/>
+					<xs:element name="PrivilegeCode" type="xs:string"/>
+					<xs:element name="BenefitRef" type="xs2:ReferenceType"/>
+					<xs:element name="SpecialMarkCode" type="xs:string"/>
+					<xs:element name="SpecialMarkRef" type="xs2:ReferenceType"/>
+					<xs:element name="IndividualValue" type="xs:boolean"/>
+					<xs:element name="PriorityRight" type="xs:boolean"/>
+					<xs:element name="WithoutEntranceExams" type="xs:boolean" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllAdmissionProcedures">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AdmissionProcedures" type="tns:AdmissionProcedures" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Document">
+				<xs:sequence>
+					<xs:element name="DocumentType" type="xs:string"/>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocumentSeries" type="xs:string"/>
+					<xs:element name="DocumentNumber" type="xs:string"/>
+					<xs:element name="DocumentDate" type="xs:date"/>
+					<xs:element name="DocumentOrganization" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DisciplineSet">
+				<xs:sequence>
+					<xs:element name="idPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="FacultetCode" type="xs:string"/>
+					<xs:element name="SubdivisionRef" type="xs2:ReferenceType"/>
+					<xs:element name="SpecialityCode" type="xs:string"/>
+					<xs:element name="DirectionRef" type="xs2:ReferenceType"/>
+					<xs:element name="ProfilCode" type="xs:string" nillable="true"/>
+					<xs:element name="ProfileRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationLevelCode" type="xs:string"/>
+					<xs:element name="EducationLevelRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationFormCode" type="xs:string"/>
+					<xs:element name="EducationFormRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationProgramCode" type="xs:string" nillable="true"/>
+					<xs:element name="EducationProgramRef" type="xs2:ReferenceType"/>
+					<xs:element name="GroupCode" type="xs:string"/>
+					<xs:element name="CompetitiveGroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="DisciplineSetID" type="xs:string"/>
+					<xs:element name="SubjectsSetRef" type="xs2:ReferenceType"/>
+					<xs:element name="DisciplineID" type="xs:string"/>
+					<xs:element name="DisciplineName" type="xs:string"/>
+					<xs:element name="SubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="DisciplineFormID" type="xs:string"/>
+					<xs:element name="DisciplineFormName" type="xs:string"/>
+					<xs:element name="EntranceTestResultSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="ChildDisciplineID" type="xs:string"/>
+					<xs:element name="ChildDisciplineName" type="xs:string"/>
+					<xs:element name="ChildSubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="ChangeDisciplineID" type="xs:string"/>
+					<xs:element name="ChangeDisciplineName" type="xs:string"/>
+					<xs:element name="AlternativeSubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="MinimalBall" type="xs:decimal"/>
+					<xs:element name="CurriculumRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllPredmets">
+				<xs:sequence>
+					<xs:element name="Discipline" type="tns:DisciplineSet" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentTypesAbiturient">
+				<xs:sequence>
+					<xs:element name="idPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocumentSetCode" type="xs:string"/>
+					<xs:element name="DocumentSetRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocumentTypeCode" type="xs:string"/>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="NumberDocument" type="xs:string"/>
+					<xs:element name="ScanRequired" type="xs:boolean"/>
+					<xs:element name="NeedOneOfDocuments" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAllDocumentTypesAbiturient">
+				<xs:sequence>
+					<xs:element name="DocumentTypeAbiturient" type="tns:DocumentTypesAbiturient" maxOccurs="unbounded"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Olympiad">
+				<xs:sequence>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="SpecialMarkCode" type="xs:string"/>
+					<xs:element name="SpecialMarkRef" type="xs2:ReferenceType"/>
+					<xs:element name="OlympiadCode" type="xs:string"/>
+					<xs:element name="OlympicRef" type="xs2:ReferenceType"/>
+					<xs:element name="CurriculumCode" type="xs:string"/>
+					<xs:element name="CurriculumRef" type="xs2:ReferenceType"/>
+					<xs:element name="VariantOfRetest" type="xs:string"/>
+					<xs:element name="VariantOfRetestRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetOlympiad">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Olympiad" type="tns:Olympiad" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAvailableDocumentTypes">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AvailableDocumentTypes" type="tns:AvailableDocumentTypes" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AvailableDocumentTypes">
+				<xs:sequence>
+					<xs:element name="IdPK" type="xs:string"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="IdSubject" type="xs:string"/>
+					<xs:element name="SubjectType" type="xs:string"/>
+					<xs:element name="FilterRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocumentType" type="xs:string"/>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="ScanRequired" type="xs:boolean"/>
+					<xs:element name="NeedOneOfDocuments" type="xs:boolean"/>
+					<xs:element name="DocumentSetCode" type="xs:string"/>
+					<xs:element name="DocumentSetRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetReasons">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Reason" type="tns:Reason" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Reason">
+				<xs:sequence>
+					<xs:element name="ReasonCode" type="xs:string"/>
+					<xs:element name="ReasonName" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetLanguages">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Language" type="tns:Language" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Language">
+				<xs:sequence>
+					<xs:element name="LanguageCode" type="xs:string"/>
+					<xs:element name="LanguageName" type="xs:string"/>
+					<xs:element name="LanguageRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbitContractList">
+				<xs:sequence>
+					<xs:element name="Contract" type="tns:Contract" maxOccurs="unbounded"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Contract">
+				<xs:sequence>
+					<xs:element name="ContractName" type="xs:string"/>
+					<xs:element name="ContractRef" type="xs2:ReferenceType"/>
+					<xs:element name="idApplicationString" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ReferenceType">
+				<xs:sequence>
+					<xs:element name="ReferenceName" type="xs:string"/>
+					<xs:element name="ReferenceId" type="xs:string"/>
+					<xs:element name="ReferenceUID" type="xs:string"/>
+					<xs:element name="ReferenceClassName" type="xs:string"/>
+					<xs:element name="ReferenceParentUID" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceDataVersion" type="xs:string" nillable="true"/>
+					<xs:element name="IsFolder" type="xs:boolean"/>
+					<xs:element name="DeletionMark" type="xs:boolean"/>
+					<xs:element name="Posted" type="xs:boolean"/>
+					<xs:element name="Predefined" type="xs:boolean"/>
+					<xs:element name="PredefinedDataName" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetContractReportResponse">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="ContractFile" type="tns:ContractFile"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ContractFile">
+				<xs:sequence>
+					<xs:element name="FileName" type="xs:string"/>
+					<xs:element name="FileExt" type="xs:string"/>
+					<xs:element name="FileBinaryCode" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbiturientCodeAlt">
+				<xs:sequence>
+					<xs:element name="AbitCode" type="xs:string"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Documents">
+				<xs:sequence>
+					<xs:element name="Document" type="tns:DocumentAlt" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentAlt">
+				<xs:sequence>
+					<xs:element name="DocCategory" type="tns:AbiturientIdentDocCategory"/>
+					<xs:element name="DocType" type="xs:string"/>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocNumber" type="xs:string"/>
+					<xs:element name="DocSeries" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PartFileName">
+				<xs:sequence>
+					<xs:element name="PartFileName" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FilePart">
+				<xs:sequence>
+					<xs:element name="TransferId" type="xs:string"/>
+					<xs:element name="PartNumber" type="xs:int"/>
+					<xs:element name="PartFileName" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CreateAnketaParentResponse">
+				<xs:sequence>
+					<xs:element name="AbiturientCode" type="xs:string"/>
+					<xs:element name="ParentRef" type="xs2:ReferenceType"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetReferenceResponse">
+				<xs:sequence>
+					<xs:element name="Reference" type="xs2:ReferenceType"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Error">
+				<xs:sequence>
+					<xs:element name="Code" type="xs:int"/>
+					<xs:element name="Description" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetReferencesResponse">
+				<xs:sequence>
+					<xs:element name="References" type="xs2:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Overflow" type="xs:boolean"/>
+					<xs:element name="AllRowsCount" type="xs:int"/>
+					<xs:element name="ShowedRowsCount" type="xs:int"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FiltersType">
+				<xs:sequence>
+					<xs:element name="Operator" type="tns:LogicalOperatorType" nillable="true" minOccurs="0"/>
+					<xs:element name="SimpleFilters" type="tns:FilterType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="InsertedFilters" type="tns:FiltersType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="FilterType">
+				<xs:sequence>
+					<xs:element name="Field" type="xs:string"/>
+					<xs:element name="Comparison" type="tns:ComparisonType"/>
+					<xs:element name="Values" type="tns:CompositeType" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CompositeType">
+				<xs:sequence>
+					<xs:element name="ValueType" type="xs:string"/>
+					<xs:element name="Value" nillable="true" minOccurs="0"/>
+					<xs:element name="ValueRef" type="xs2:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Entrant">
+				<xs:sequence>
+					<xs:element name="EntrantRef" type="xs2:ReferenceType"/>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntrantPortalGUID" type="xs:string" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CampaignEventPeriod">
+				<xs:sequence>
+					<xs:element name="DateStart" type="xs:dateTime"/>
+					<xs:element name="DateEnd" type="xs:dateTime"/>
+					<xs:element name="AllowAgreementSubmissionOnCompetitiveGroupApplicationDay" type="xs:boolean"/>
+					<xs:element name="AllowAgreementSubmissionOnFirstApplicationDay" type="xs:boolean"/>
+					<xs:element name="PeriodTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CampaignEventPeriods">
+				<xs:sequence>
+					<xs:element name="CampaignEventPeriod" type="tns:CampaignEventPeriod" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PortalEntrantApplication">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntrantPortalGUID" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CompetitiveGroupEntranceTests">
+				<xs:sequence>
+					<xs:element name="CompetitiveGroupEntranceTest" type="tns:CompetitiveGroupEntranceTestType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CompetitiveGroupEntranceTestType">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="CompetitiveGroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="CurriculumRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntranceTestSets" type="tns:EntranceTestSetType" maxOccurs="unbounded"/>
+					<xs:element name="AllowMultiplyAlternativeSubjects" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntranceTestSetType">
+				<xs:sequence>
+					<xs:element name="EntranceTestSetRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntranceTests" type="tns:EntranceTestType" maxOccurs="unbounded"/>
+					<xs:element name="AdmissionConditionGroupRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntranceTestType">
+				<xs:sequence>
+					<xs:element name="Priority" type="xs:long"/>
+					<xs:element name="SubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntranceTestResultSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="MinScore" type="xs:decimal" nillable="true"/>
+					<xs:element name="ChildSubjects" type="tns:ChildSubjectType" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ChildSubjectType">
+				<xs:sequence>
+					<xs:element name="ChildSubjectIndex" type="xs:long"/>
+					<xs:element name="ChildSubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EducationLevelDocumentTypeMap">
+				<xs:sequence>
+					<xs:element name="Period" type="xs:dateTime"/>
+					<xs:element name="EducationTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationLevelRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="Actual" type="xs:boolean"/>
+					<xs:element name="AllowProfileInput" type="xs:boolean"/>
+					<xs:element name="AllowDirectionDisplay" type="xs:boolean"/>
+					<xs:element name="AllowProfileDisplay" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetEducationLevelDocumentTypeMap">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="EducationLevelDocumentTypeMap" type="tns:EducationLevelDocumentTypeMap" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EducationDocument">
+				<xs:sequence>
+					<xs:element name="EducationDocumentReferenceType" type="xs2:ReferenceType"/>
+					<xs:element name="EducationTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocSeries" type="xs:string"/>
+					<xs:element name="DocNumber" type="xs:string"/>
+					<xs:element name="DocOrganization" type="xs:string"/>
+					<xs:element name="IssueDate" type="xs:date"/>
+					<xs:element name="GraduationYear" type="xs:integer"/>
+					<xs:element name="SubdivisionCode" type="xs:string"/>
+					<xs:element name="ProfileRef" type="xs2:ReferenceType" nillable="true" minOccurs="0"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PredmetOfExamsSchedule">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="CurriculumRef" type="xs2:ReferenceType"/>
+					<xs:element name="FinanceRef" type="xs2:ReferenceType"/>
+					<xs:element name="GroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="SubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="FormRef" type="xs2:ReferenceType"/>
+					<xs:element name="PredmetGUID" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetPredmetsOfExamsSchedule">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="PredmetOfExamsSchedule" type="tns:PredmetOfExamsSchedule" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DateTimeOfExamsSchedule">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="PredmetGUID" type="xs:string"/>
+					<xs:element name="GUIDDateTime" type="xs:string"/>
+					<xs:element name="EventTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="StartDate" type="xs:dateTime"/>
+					<xs:element name="EndDate" type="xs:dateTime"/>
+					<xs:element name="RegistrationDate" type="xs:dateTime"/>
+					<xs:element name="ClassroomRef" type="xs2:ReferenceType"/>
+					<xs:element name="Note" type="xs:string"/>
+					<xs:element name="Remotely" type="xs:boolean"/>
+					<xs:element name="LanguageRef" type="xs2:ReferenceType"/>
+					<xs:element name="ReserveDate" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetDateTimeOfExamsSchedule">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="DateTimeOfExamsSchedule" type="tns:DateTimeOfExamsSchedule" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAdditionalReceiptDateControl">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="AdditionalReceiptDateControl" type="tns:AdditionalReceiptDateControl" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdditionalReceiptDateControl">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="CompetitiveGroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="Stage" type="xs:long"/>
+					<xs:element name="DateStart" type="xs:dateTime"/>
+					<xs:element name="DateFinal" type="xs:dateTime"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbiturientCampaignsResponse">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="Campaign" type="xs2:ReferenceType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="EntranceTestInstance">
+				<xs:sequence>
+					<xs:element name="SubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="EntranceTestResultSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="ParentSubjectRef" type="xs2:ReferenceType"/>
+					<xs:element name="Priority" type="xs:long"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AddressType">
+				<xs:sequence>
+					<xs:element name="ContactInformationType" type="tns:ContactInformationType"/>
+					<xs:element name="Index" type="xs:string"/>
+					<xs:element name="Country" type="xs2:ReferenceType"/>
+					<xs:element name="Region" type="xs:string"/>
+					<xs:element name="Area" type="xs:string"/>
+					<xs:element name="City" type="xs:string"/>
+					<xs:element name="Place" type="xs:string"/>
+					<xs:element name="Street" type="xs:string"/>
+					<xs:element name="House" type="xs:string"/>
+					<xs:element name="Building" type="xs:string"/>
+					<xs:element name="Apartment" type="xs:string"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="IdentificateDocumentType">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="Surname" type="xs:string"/>
+					<xs:element name="Patronymic" type="xs:string"/>
+					<xs:element name="Document" type="tns:DocumentType"/>
+					<xs:element name="SubdivisionCode" type="xs:string" nillable="true"/>
+					<xs:element name="Removed" type="xs:boolean" default="false"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentType">
+				<xs:sequence>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocSeries" type="xs:string"/>
+					<xs:element name="DocNumber" type="xs:string"/>
+					<xs:element name="DocOrganization" type="xs:string" nillable="true"/>
+					<xs:element name="IssueDate" type="xs:date"/>
+					<xs:element name="DocumentCheckStatusRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="ReadOnly" type="xs:boolean" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="File">
+				<xs:sequence>
+					<xs:element name="FileUID" type="xs:string"/>
+					<xs:element name="FileHash" type="xs:string"/>
+					<xs:element name="FileName" type="xs:string"/>
+					<xs:element name="FileExt" type="xs:string"/>
+					<xs:element name="FileTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="FileParts" type="tns:FilePart" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Removed" type="xs:boolean"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAbiturientCodePassFIOBDateResponce">
+				<xs:sequence>
+					<xs:element name="AbiturientDoubles" type="tns:AbiturientDouble" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentTypeProperties">
+				<xs:sequence>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="Properties" type="tns:Property" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Property">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string"/>
+					<xs:element name="IsUsed" type="xs:boolean"/>
+					<xs:element name="FillChecking" type="xs:boolean"/>
+					<xs:element name="Pattern" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetDocumentTypePropertySettingsResponce">
+				<xs:sequence>
+					<xs:element name="DocumentTypeProperties" type="tns:DocumentTypeProperties" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAvailableDocumentTypesResponce">
+				<xs:sequence>
+					<xs:element name="CampaignAvailableDocumentTypes" type="tns:CampaignAvailableDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CampaignAvailableDocumentType">
+				<xs:sequence>
+					<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					<xs:element name="DocumentSets" type="tns:DocumentSet" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentSet">
+				<xs:sequence>
+					<xs:element name="DocumentSetRef" type="xs2:ReferenceType"/>
+					<xs:element name="NeedOneOfDocuments" type="xs:boolean"/>
+					<xs:element name="Filters" type="tns:DocumentSetFilter" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="DocumentTypes" type="tns:DocumentSetDocumentType" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentSetFilter">
+				<xs:sequence>
+					<xs:element name="FilterTypeName" type="xs:string"/>
+					<xs:element name="FilterValueRef" type="xs2:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DocumentSetDocumentType">
+				<xs:sequence>
+					<xs:element name="DocumentTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="ScanRequired" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CompetitiveGroupRefs">
+				<xs:sequence>
+					<xs:element name="CompetitiveGroupRef" type="xs2:ReferenceType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Contractor">
+				<xs:sequence>
+					<xs:element name="ContractorRef" type="xs2:ReferenceType"/>
+					<xs:element name="SubdivisionCode" type="xs:string" nillable="true"/>
+					<xs:element name="ContractorTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="ContactInformation" type="tns:AddressType" nillable="true" maxOccurs="unbounded"/>
+					<xs:element name="FullName" type="xs:string" nillable="true"/>
+					<xs:element name="ShortName" type="xs:string" nillable="true"/>
+					<xs:element name="UIDTargetContractor" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ContractorListResponse">
+				<xs:sequence>
+					<xs:element name="Contractors" type="tns:Contractor" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="Overflow" type="xs:boolean"/>
+					<xs:element name="AllRowsCount" type="xs:int"/>
+					<xs:element name="ShowedRowsCount" type="xs:int"/>
+					<xs:element name="Error" type="tns:Error" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PriorityCondition">
+				<xs:sequence>
+					<xs:element name="ConditionRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AgreementCondition">
+				<xs:sequence>
+					<xs:element name="EducationSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdmissionCondition">
+				<xs:sequence>
+					<xs:element name="ConditionTypeRef" type="xs2:ReferenceType"/>
+					<xs:element name="ConditionRef" type="xs2:ReferenceType"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="Speciality">
+				<xs:sequence>
+					<xs:element name="ApplicationStringGUID" type="xs:string"/>
+					<xs:element name="CompetitiveGroupRef" type="xs2:ReferenceType"/>
+					<xs:element name="DirectionRef" type="xs2:ReferenceType"/>
+					<xs:element name="CurriculumRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationLevelRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationFormRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationProgramRef" type="xs2:ReferenceType"/>
+					<xs:element name="EducationSourceRef" type="xs2:ReferenceType"/>
+					<xs:element name="LevelBudgetRef" type="xs2:ReferenceType"/>
+					<xs:element name="UGSRef" type="xs2:ReferenceType"/>
+					<xs:element name="BranchRef" type="xs2:ReferenceType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdmissionConditionGroup">
+				<xs:sequence>
+					<xs:element name="AdmissionConditionGroupRef" type="xs2:ReferenceType" nillable="true"/>
+					<xs:element name="AdmissionConditions" type="tns:AdmissionCondition" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetSeparateQuotaAdmissionProcedures">
+				<xs:sequence>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+					<xs:element name="SeparateQuotaAdmissionProcedures" type="tns:SeparateQuotaAdmissionProcedure" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="SeparateQuotaAdmissionProcedure">
+				<xs:sequence>
+					<xs:element name="SpecialMarkRef" type="xs2:ReferenceType"/>
+					<xs:element name="WithoutEntranceExams" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetAdmissionConditionGroups">
+				<xs:sequence>
+					<xs:element name="AdmissionConditionGroups" type="tns:AdmissionConditionGroup" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="GetOlympicInfo">
+				<xs:sequence>
+					<xs:element name="OlympicInfo" type="tns:OlympicInfo" maxOccurs="unbounded"/>
+					<xs:element name="UniversalResponse" type="tns:UniversalResponse"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="OlympicInfo">
+				<xs:sequence>
+					<xs:element name="OlympicRef" type="xs2:ReferenceType"/>
+					<xs:element name="SpecialMarkRef" type="xs2:ReferenceType"/>
+					<xs:element name="VariantOfRetestRef" type="xs2:ReferenceType"/>
+					<xs:element name="CurriculumRefs" type="xs2:ReferenceType" maxOccurs="unbounded"/>
+					<xs:element name="AdditionalElement" type="xs2:AdditionalElement" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="OlympicsRefs">
+				<xs:sequence>
+					<xs:element name="OlympicRef" type="xs2:ReferenceType" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="DeleteIndividualExam">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AbiturientCode" type="xs:string"/>
+						<xs:element name="IdPK" type="xs:string"/>
+						<xs:element name="IdExam" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="DeleteIndividualExamResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:UniversalResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCode">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Series" type="xs:string"/>
+						<xs:element name="Number" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCodeResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:AbitCode"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllIndividualExams">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllIndividualExamsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetEGEPriema"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllPredmets">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllPredmetsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAllPredmets"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetApplicationEGE">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="StringPlanPriema" type="tns:StringPlanPriema"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetApplicationEGEResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetEGEPriema"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetMinimalBall">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="StringPlanPriema" type="tns:StringPlanPriema"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetMinimalBallResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetMinimalBall"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetPK">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetPKResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetPK"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetPKInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="IdPK" type="xs:string"/>
+						<xs:element name="CampaignRef" type="xs2:ReferenceType" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetPKInfoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetPKInfo"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReleaseVersion">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReleaseVersionResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetStringsPriema">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+						<xs:element name="CompetitiveGroupRefs" type="tns:CompetitiveGroupRefs"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetStringsPriemaResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:ReceiptStrings"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NeedBlockAndUpdate">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AbiturientCode" type="xs:string"/>
+						<xs:element name="Date" type="xs:dateTime"/>
+						<xs:element name="IdPK" type="xs:string"/>
+						<xs:element name="Entrant" type="tns:Entrant"/>
+						<xs:element name="ConsentDate" type="xs:dateTime" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="NeedBlockAndUpdateResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:NeedBlockAndUpdate"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TestConnect">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="TestConnectResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCodeDoubles">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FirstName" type="xs:string" nillable="true"/>
+						<xs:element name="LastName" type="xs:string" nillable="true"/>
+						<xs:element name="SecondName" type="xs:string" nillable="true"/>
+						<xs:element name="BirthDate" type="xs:date" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCodeDoublesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAbiturientCodeDoublesResponse" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllOlympiads">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllOlympiadsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAllOlympiads"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllAdmissionProcedures">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllAdmissionProceduresResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAllAdmissionProcedures"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllDocumentTypesAbiturient">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllDocumentTypesAbiturientResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAllDocumentTypesAbiturient"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllSpecialMarks">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAllSpecialMarksResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAllSpecialMarks"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetOlympiad">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+						<xs:element name="CompetitiveGroupRefs" type="tns:CompetitiveGroupRefs"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetOlympiadResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetOlympiad"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAvailableDocumentTypesForIndividualExam">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAvailableDocumentTypesForIndividualExamResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAvailableDocumentTypes"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAvailableDocumentTypesForConcession">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAvailableDocumentTypesForConcessionResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAvailableDocumentTypes"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReasons">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReasonsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetReasons"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetLanguages">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetLanguagesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetLanguages"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCodeAlt">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="FirstName" type="xs:string"/>
+						<xs:element name="SecondName" type="xs:string"/>
+						<xs:element name="LastName" type="xs:string"/>
+						<xs:element name="BirthDate" type="xs:date"/>
+						<xs:element name="Documents" type="tns:Documents"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCodeAltResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAbiturientCodeAlt"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ReturnAllApplications">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AbiturientCode" type="xs:string"/>
+						<xs:element name="IdPK" type="xs:string"/>
+						<xs:element name="Entrant" type="tns:Entrant"/>
+						<xs:element name="ReturnDocumentsScan" type="tns:File" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ReturnAllApplicationsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:UniversalResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PutFilePart">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TransferId" type="xs:string"/>
+						<xs:element name="PartNumber" type="xs:string"/>
+						<xs:element name="PartData" type="xs:base64Binary"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PutFilePartResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:PartFileName"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCodePassFIOBDate">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Series" type="xs:string"/>
+						<xs:element name="Number" type="xs:string"/>
+						<xs:element name="DocumentTypeRef" type="xs2:ReferenceType" nillable="true"/>
+						<xs:element name="Snils" type="xs:string"/>
+						<xs:element name="BirthDate" type="xs:date" nillable="true"/>
+						<xs:element name="FirstName" type="xs:string" nillable="true"/>
+						<xs:element name="LastName" type="xs:string" nillable="true"/>
+						<xs:element name="SecondName" type="xs:string" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCodePassFIOBDateResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAbiturientCodePassFIOBDateResponce"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbitContractList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="AbiturientCode" type="xs:string"/>
+						<xs:element name="IdPK" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbitContractListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAbitContractList"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetContractReport">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ContractRef" type="xs2:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetContractReportResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetContractReportResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReference">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Parameter" type="xs:string"/>
+						<xs:element name="ParameterType" type="xs:string"/>
+						<xs:element name="ParameterRef" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReferenceResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetReferenceResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReferences">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ReferenceClassName" type="xs:string"/>
+						<xs:element name="TextFilterType" type="tns:TextFilterType"/>
+						<xs:element name="Text" type="xs:string" nillable="true"/>
+						<xs:element name="Filters" type="tns:FiltersType" nillable="true"/>
+						<xs:element name="AdditionalFields" type="xs:string" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetReferencesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetReferencesResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEntrantTestSets">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+						<xs:element name="CompetitiveGroupRefs" type="tns:CompetitiveGroupRefs"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEntrantTestSetsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:CompetitiveGroupEntranceTests"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEducationLevelDocumentTypeMap">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetEducationLevelDocumentTypeMapResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetEducationLevelDocumentTypeMap"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetPredmetsOfExamsSchedule">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetPredmetsOfExamsScheduleResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetPredmetsOfExamsSchedule"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetDateTimeOfExamsSchedule">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="CampaignRef" type="xs2:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetDateTimeOfExamsScheduleResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetDateTimeOfExamsSchedule"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAdditionalReceiptDateControl">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAdditionalReceiptDateControlResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAdditionalReceiptDateControl"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RunMethod">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="xs:string"/>
+						<xs:element name="Body" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RunMethodResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetDocumentTypePropertySettings">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetDocumentTypePropertySettingsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetDocumentTypePropertySettingsResponce"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAvailableDocumentTypes">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAvailableDocumentTypesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAvailableDocumentTypesResponce"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersions">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersionsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs2:InterfaceVersionsType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersion">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetInterfaceVersionResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFiasRegionsList">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFiasRegionsListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFiasRegionElements">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="RegionNumber" type="xs:integer"/>
+						<xs:element name="FetchingItemsCount" type="xs:integer" nillable="true"/>
+						<xs:element name="StartFiasIdentity" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFiasRegionElementsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCurrentTime">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetCurrentTimeResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:dateTime"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFiasOwnershipsBuildingsTypes">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetFiasOwnershipsBuildingsTypesResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetContractorList">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="TextFilterType" type="tns:TextFilterType"/>
+						<xs:element name="Text" type="xs:string" nillable="true"/>
+						<xs:element name="Filters" type="tns:FiltersType" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetContractorListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:ContractorListResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetOrCreateContractor">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Name" type="xs:string"/>
+						<xs:element name="Type" type="xs2:ReferenceType"/>
+						<xs:element name="SubdivisionCode" type="xs:string" nillable="true"/>
+						<xs:element name="Address" type="tns:AddressType" nillable="true"/>
+						<xs:element name="AdditionalElement" type="xs2:AdditionalElement" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetOrCreateContractorResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:Contractor"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RemoveZayavlenie">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Entrant" type="tns:Entrant"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RemoveZayavlenieResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:UniversalResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCampaigns">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EntrantRef" type="xs2:ReferenceType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAbiturientCampaignsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAbiturientCampaignsResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RejectEnrollment">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Entrant" type="tns:Entrant"/>
+						<xs:element name="Speciality" type="tns:Speciality"/>
+						<xs:element name="RejectEnrollmentScan" type="tns:File" nillable="true"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="RejectEnrollmentResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:UniversalResponse"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAvailableDocumentTypesForCompatriots">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAvailableDocumentTypesForCompatriotsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetAvailableDocumentTypes"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetSeparateQuotaAdmissionProcedures">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetSeparateQuotaAdmissionProceduresResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetSeparateQuotaAdmissionProcedures"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAdmissionConditionGroups">
+				<xs:complexType>
+					<xs:sequence/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetAdmissionConditionGroupsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetOlympicsInfo">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="OlympicsRefs" type="tns:OlympicsRefs"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GetOlympicsInfoResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" type="tns:GetOlympicInfo"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+		<xs:schema xmlns:tns="http://sgu-infocom.ru/common" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://sgu-infocom.ru/common" attributeFormDefault="unqualified" elementFormDefault="qualified">
+			<xs:complexType name="ReferenceType">
+				<xs:sequence>
+					<xs:element name="ReferenceName" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceId" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceUID" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceClassName" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceParentUID" type="xs:string" nillable="true"/>
+					<xs:element name="ReferenceDataVersion" type="xs:string" nillable="true"/>
+					<xs:element name="IsFolder" type="xs:boolean"/>
+					<xs:element name="DeletionMark" type="xs:boolean"/>
+					<xs:element name="Posted" type="xs:boolean"/>
+					<xs:element name="Predefined" type="xs:boolean"/>
+					<xs:element name="PredefinedDataName" type="xs:string" nillable="true"/>
+					<xs:element name="AdditionalElement" type="tns:AdditionalElement" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InterfaceVersionType">
+				<xs:sequence>
+					<xs:element name="Name" type="xs:string" nillable="true"/>
+					<xs:element name="Version" type="xs:string" nillable="true"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="InterfaceVersionsType">
+				<xs:sequence>
+					<xs:element name="InterfaceVersion" type="tns:InterfaceVersionType" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdditionalElement">
+				<xs:sequence>
+					<xs:element name="ElementName" type="xs:string"/>
+					<xs:element name="ElementValue"/>
+				</xs:sequence>
+			</xs:complexType>
+		</xs:schema>
+	</types>
+	<message name="DeleteIndividualExamRequestMessage">
+		<part name="parameters" element="tns:DeleteIndividualExam"/>
+	</message>
+	<message name="DeleteIndividualExamResponseMessage">
+		<part name="parameters" element="tns:DeleteIndividualExamResponse"/>
+	</message>
+	<message name="GetAbiturientCodeRequestMessage">
+		<part name="parameters" element="tns:GetAbiturientCode"/>
+	</message>
+	<message name="GetAbiturientCodeResponseMessage">
+		<part name="parameters" element="tns:GetAbiturientCodeResponse"/>
+	</message>
+	<message name="GetAllIndividualExamsRequestMessage">
+		<part name="parameters" element="tns:GetAllIndividualExams"/>
+	</message>
+	<message name="GetAllIndividualExamsResponseMessage">
+		<part name="parameters" element="tns:GetAllIndividualExamsResponse"/>
+	</message>
+	<message name="GetAllPredmetsRequestMessage">
+		<part name="parameters" element="tns:GetAllPredmets"/>
+	</message>
+	<message name="GetAllPredmetsResponseMessage">
+		<part name="parameters" element="tns:GetAllPredmetsResponse"/>
+	</message>
+	<message name="GetApplicationEGERequestMessage">
+		<part name="parameters" element="tns:GetApplicationEGE"/>
+	</message>
+	<message name="GetApplicationEGEResponseMessage">
+		<part name="parameters" element="tns:GetApplicationEGEResponse"/>
+	</message>
+	<message name="GetMinimalBallRequestMessage">
+		<part name="parameters" element="tns:GetMinimalBall"/>
+	</message>
+	<message name="GetMinimalBallResponseMessage">
+		<part name="parameters" element="tns:GetMinimalBallResponse"/>
+	</message>
+	<message name="GetPKRequestMessage">
+		<part name="parameters" element="tns:GetPK"/>
+	</message>
+	<message name="GetPKResponseMessage">
+		<part name="parameters" element="tns:GetPKResponse"/>
+	</message>
+	<message name="GetPKInfoRequestMessage">
+		<part name="parameters" element="tns:GetPKInfo"/>
+	</message>
+	<message name="GetPKInfoResponseMessage">
+		<part name="parameters" element="tns:GetPKInfoResponse"/>
+	</message>
+	<message name="GetReleaseVersionRequestMessage">
+		<part name="parameters" element="tns:GetReleaseVersion"/>
+	</message>
+	<message name="GetReleaseVersionResponseMessage">
+		<part name="parameters" element="tns:GetReleaseVersionResponse"/>
+	</message>
+	<message name="GetStringsPriemaRequestMessage">
+		<part name="parameters" element="tns:GetStringsPriema"/>
+	</message>
+	<message name="GetStringsPriemaResponseMessage">
+		<part name="parameters" element="tns:GetStringsPriemaResponse"/>
+	</message>
+	<message name="NeedBlockAndUpdateRequestMessage">
+		<part name="parameters" element="tns:NeedBlockAndUpdate"/>
+	</message>
+	<message name="NeedBlockAndUpdateResponseMessage">
+		<part name="parameters" element="tns:NeedBlockAndUpdateResponse"/>
+	</message>
+	<message name="TestConnectRequestMessage">
+		<part name="parameters" element="tns:TestConnect"/>
+	</message>
+	<message name="TestConnectResponseMessage">
+		<part name="parameters" element="tns:TestConnectResponse"/>
+	</message>
+	<message name="GetAbiturientCodeDoublesRequestMessage">
+		<part name="parameters" element="tns:GetAbiturientCodeDoubles"/>
+	</message>
+	<message name="GetAbiturientCodeDoublesResponseMessage">
+		<part name="parameters" element="tns:GetAbiturientCodeDoublesResponse"/>
+	</message>
+	<message name="GetAllOlympiadsRequestMessage">
+		<part name="parameters" element="tns:GetAllOlympiads"/>
+	</message>
+	<message name="GetAllOlympiadsResponseMessage">
+		<part name="parameters" element="tns:GetAllOlympiadsResponse"/>
+	</message>
+	<message name="GetAllAdmissionProceduresRequestMessage">
+		<part name="parameters" element="tns:GetAllAdmissionProcedures"/>
+	</message>
+	<message name="GetAllAdmissionProceduresResponseMessage">
+		<part name="parameters" element="tns:GetAllAdmissionProceduresResponse"/>
+	</message>
+	<message name="GetAllDocumentTypesAbiturientRequestMessage">
+		<part name="parameters" element="tns:GetAllDocumentTypesAbiturient"/>
+	</message>
+	<message name="GetAllDocumentTypesAbiturientResponseMessage">
+		<part name="parameters" element="tns:GetAllDocumentTypesAbiturientResponse"/>
+	</message>
+	<message name="GetAllSpecialMarksRequestMessage">
+		<part name="parameters" element="tns:GetAllSpecialMarks"/>
+	</message>
+	<message name="GetAllSpecialMarksResponseMessage">
+		<part name="parameters" element="tns:GetAllSpecialMarksResponse"/>
+	</message>
+	<message name="GetOlympiadRequestMessage">
+		<part name="parameters" element="tns:GetOlympiad"/>
+	</message>
+	<message name="GetOlympiadResponseMessage">
+		<part name="parameters" element="tns:GetOlympiadResponse"/>
+	</message>
+	<message name="GetAvailableDocumentTypesForIndividualExamRequestMessage">
+		<part name="parameters" element="tns:GetAvailableDocumentTypesForIndividualExam"/>
+	</message>
+	<message name="GetAvailableDocumentTypesForIndividualExamResponseMessage">
+		<part name="parameters" element="tns:GetAvailableDocumentTypesForIndividualExamResponse"/>
+	</message>
+	<message name="GetAvailableDocumentTypesForConcessionRequestMessage">
+		<part name="parameters" element="tns:GetAvailableDocumentTypesForConcession"/>
+	</message>
+	<message name="GetAvailableDocumentTypesForConcessionResponseMessage">
+		<part name="parameters" element="tns:GetAvailableDocumentTypesForConcessionResponse"/>
+	</message>
+	<message name="GetReasonsRequestMessage">
+		<part name="parameters" element="tns:GetReasons"/>
+	</message>
+	<message name="GetReasonsResponseMessage">
+		<part name="parameters" element="tns:GetReasonsResponse"/>
+	</message>
+	<message name="GetLanguagesRequestMessage">
+		<part name="parameters" element="tns:GetLanguages"/>
+	</message>
+	<message name="GetLanguagesResponseMessage">
+		<part name="parameters" element="tns:GetLanguagesResponse"/>
+	</message>
+	<message name="GetAbiturientCodeAltRequestMessage">
+		<part name="parameters" element="tns:GetAbiturientCodeAlt"/>
+	</message>
+	<message name="GetAbiturientCodeAltResponseMessage">
+		<part name="parameters" element="tns:GetAbiturientCodeAltResponse"/>
+	</message>
+	<message name="ReturnAllApplicationsRequestMessage">
+		<part name="parameters" element="tns:ReturnAllApplications"/>
+	</message>
+	<message name="ReturnAllApplicationsResponseMessage">
+		<part name="parameters" element="tns:ReturnAllApplicationsResponse"/>
+	</message>
+	<message name="PutFilePartRequestMessage">
+		<part name="parameters" element="tns:PutFilePart"/>
+	</message>
+	<message name="PutFilePartResponseMessage">
+		<part name="parameters" element="tns:PutFilePartResponse"/>
+	</message>
+	<message name="GetAbiturientCodePassFIOBDateRequestMessage">
+		<part name="parameters" element="tns:GetAbiturientCodePassFIOBDate"/>
+	</message>
+	<message name="GetAbiturientCodePassFIOBDateResponseMessage">
+		<part name="parameters" element="tns:GetAbiturientCodePassFIOBDateResponse"/>
+	</message>
+	<message name="GetAbitContractListRequestMessage">
+		<part name="parameters" element="tns:GetAbitContractList"/>
+	</message>
+	<message name="GetAbitContractListResponseMessage">
+		<part name="parameters" element="tns:GetAbitContractListResponse"/>
+	</message>
+	<message name="GetContractReportRequestMessage">
+		<part name="parameters" element="tns:GetContractReport"/>
+	</message>
+	<message name="GetContractReportResponseMessage">
+		<part name="parameters" element="tns:GetContractReportResponse"/>
+	</message>
+	<message name="GetReferenceRequestMessage">
+		<part name="parameters" element="tns:GetReference"/>
+	</message>
+	<message name="GetReferenceResponseMessage">
+		<part name="parameters" element="tns:GetReferenceResponse"/>
+	</message>
+	<message name="GetReferencesRequestMessage">
+		<part name="parameters" element="tns:GetReferences"/>
+	</message>
+	<message name="GetReferencesResponseMessage">
+		<part name="parameters" element="tns:GetReferencesResponse"/>
+	</message>
+	<message name="GetEntrantTestSetsRequestMessage">
+		<part name="parameters" element="tns:GetEntrantTestSets"/>
+	</message>
+	<message name="GetEntrantTestSetsResponseMessage">
+		<part name="parameters" element="tns:GetEntrantTestSetsResponse"/>
+	</message>
+	<message name="GetEducationLevelDocumentTypeMapRequestMessage">
+		<part name="parameters" element="tns:GetEducationLevelDocumentTypeMap"/>
+	</message>
+	<message name="GetEducationLevelDocumentTypeMapResponseMessage">
+		<part name="parameters" element="tns:GetEducationLevelDocumentTypeMapResponse"/>
+	</message>
+	<message name="GetPredmetsOfExamsScheduleRequestMessage">
+		<part name="parameters" element="tns:GetPredmetsOfExamsSchedule"/>
+	</message>
+	<message name="GetPredmetsOfExamsScheduleResponseMessage">
+		<part name="parameters" element="tns:GetPredmetsOfExamsScheduleResponse"/>
+	</message>
+	<message name="GetDateTimeOfExamsScheduleRequestMessage">
+		<part name="parameters" element="tns:GetDateTimeOfExamsSchedule"/>
+	</message>
+	<message name="GetDateTimeOfExamsScheduleResponseMessage">
+		<part name="parameters" element="tns:GetDateTimeOfExamsScheduleResponse"/>
+	</message>
+	<message name="GetAdditionalReceiptDateControlRequestMessage">
+		<part name="parameters" element="tns:GetAdditionalReceiptDateControl"/>
+	</message>
+	<message name="GetAdditionalReceiptDateControlResponseMessage">
+		<part name="parameters" element="tns:GetAdditionalReceiptDateControlResponse"/>
+	</message>
+	<message name="RunMethodRequestMessage">
+		<part name="parameters" element="tns:RunMethod"/>
+	</message>
+	<message name="RunMethodResponseMessage">
+		<part name="parameters" element="tns:RunMethodResponse"/>
+	</message>
+	<message name="GetDocumentTypePropertySettingsRequestMessage">
+		<part name="parameters" element="tns:GetDocumentTypePropertySettings"/>
+	</message>
+	<message name="GetDocumentTypePropertySettingsResponseMessage">
+		<part name="parameters" element="tns:GetDocumentTypePropertySettingsResponse"/>
+	</message>
+	<message name="GetAvailableDocumentTypesRequestMessage">
+		<part name="parameters" element="tns:GetAvailableDocumentTypes"/>
+	</message>
+	<message name="GetAvailableDocumentTypesResponseMessage">
+		<part name="parameters" element="tns:GetAvailableDocumentTypesResponse"/>
+	</message>
+	<message name="GetInterfaceVersionsRequestMessage">
+		<part name="parameters" element="tns:GetInterfaceVersions"/>
+	</message>
+	<message name="GetInterfaceVersionsResponseMessage">
+		<part name="parameters" element="tns:GetInterfaceVersionsResponse"/>
+	</message>
+	<message name="GetInterfaceVersionRequestMessage">
+		<part name="parameters" element="tns:GetInterfaceVersion"/>
+	</message>
+	<message name="GetInterfaceVersionResponseMessage">
+		<part name="parameters" element="tns:GetInterfaceVersionResponse"/>
+	</message>
+	<message name="GetFiasRegionsListRequestMessage">
+		<part name="parameters" element="tns:GetFiasRegionsList"/>
+	</message>
+	<message name="GetFiasRegionsListResponseMessage">
+		<part name="parameters" element="tns:GetFiasRegionsListResponse"/>
+	</message>
+	<message name="GetFiasRegionElementsRequestMessage">
+		<part name="parameters" element="tns:GetFiasRegionElements"/>
+	</message>
+	<message name="GetFiasRegionElementsResponseMessage">
+		<part name="parameters" element="tns:GetFiasRegionElementsResponse"/>
+	</message>
+	<message name="GetCurrentTimeRequestMessage">
+		<part name="parameters" element="tns:GetCurrentTime"/>
+	</message>
+	<message name="GetCurrentTimeResponseMessage">
+		<part name="parameters" element="tns:GetCurrentTimeResponse"/>
+	</message>
+	<message name="GetFiasOwnershipsBuildingsTypesRequestMessage">
+		<part name="parameters" element="tns:GetFiasOwnershipsBuildingsTypes"/>
+	</message>
+	<message name="GetFiasOwnershipsBuildingsTypesResponseMessage">
+		<part name="parameters" element="tns:GetFiasOwnershipsBuildingsTypesResponse"/>
+	</message>
+	<message name="GetContractorListRequestMessage">
+		<part name="parameters" element="tns:GetContractorList"/>
+	</message>
+	<message name="GetContractorListResponseMessage">
+		<part name="parameters" element="tns:GetContractorListResponse"/>
+	</message>
+	<message name="GetOrCreateContractorRequestMessage">
+		<part name="parameters" element="tns:GetOrCreateContractor"/>
+	</message>
+	<message name="GetOrCreateContractorResponseMessage">
+		<part name="parameters" element="tns:GetOrCreateContractorResponse"/>
+	</message>
+	<message name="RemoveZayavlenieRequestMessage">
+		<part name="parameters" element="tns:RemoveZayavlenie"/>
+	</message>
+	<message name="RemoveZayavlenieResponseMessage">
+		<part name="parameters" element="tns:RemoveZayavlenieResponse"/>
+	</message>
+	<message name="GetAbiturientCampaignsRequestMessage">
+		<part name="parameters" element="tns:GetAbiturientCampaigns"/>
+	</message>
+	<message name="GetAbiturientCampaignsResponseMessage">
+		<part name="parameters" element="tns:GetAbiturientCampaignsResponse"/>
+	</message>
+	<message name="RejectEnrollmentRequestMessage">
+		<part name="parameters" element="tns:RejectEnrollment"/>
+	</message>
+	<message name="RejectEnrollmentResponseMessage">
+		<part name="parameters" element="tns:RejectEnrollmentResponse"/>
+	</message>
+	<message name="GetAvailableDocumentTypesForCompatriotsRequestMessage">
+		<part name="parameters" element="tns:GetAvailableDocumentTypesForCompatriots"/>
+	</message>
+	<message name="GetAvailableDocumentTypesForCompatriotsResponseMessage">
+		<part name="parameters" element="tns:GetAvailableDocumentTypesForCompatriotsResponse"/>
+	</message>
+	<message name="GetSeparateQuotaAdmissionProceduresRequestMessage">
+		<part name="parameters" element="tns:GetSeparateQuotaAdmissionProcedures"/>
+	</message>
+	<message name="GetSeparateQuotaAdmissionProceduresResponseMessage">
+		<part name="parameters" element="tns:GetSeparateQuotaAdmissionProceduresResponse"/>
+	</message>
+	<message name="GetAdmissionConditionGroupsRequestMessage">
+		<part name="parameters" element="tns:GetAdmissionConditionGroups"/>
+	</message>
+	<message name="GetAdmissionConditionGroupsResponseMessage">
+		<part name="parameters" element="tns:GetAdmissionConditionGroupsResponse"/>
+	</message>
+	<message name="GetOlympicsInfoRequestMessage">
+		<part name="parameters" element="tns:GetOlympicsInfo"/>
+	</message>
+	<message name="GetOlympicsInfoResponseMessage">
+		<part name="parameters" element="tns:GetOlympicsInfoResponse"/>
+	</message>
+	<portType name="WebAbitPortType">
+		<operation name="DeleteIndividualExam">
+			<input message="tns:DeleteIndividualExamRequestMessage"/>
+			<output message="tns:DeleteIndividualExamResponseMessage"/>
+		</operation>
+		<operation name="GetAbiturientCode">
+			<input message="tns:GetAbiturientCodeRequestMessage"/>
+			<output message="tns:GetAbiturientCodeResponseMessage"/>
+		</operation>
+		<operation name="GetAllIndividualExams">
+			<input message="tns:GetAllIndividualExamsRequestMessage"/>
+			<output message="tns:GetAllIndividualExamsResponseMessage"/>
+		</operation>
+		<operation name="GetAllPredmets">
+			<input message="tns:GetAllPredmetsRequestMessage"/>
+			<output message="tns:GetAllPredmetsResponseMessage"/>
+		</operation>
+		<operation name="GetApplicationEGE">
+			<input message="tns:GetApplicationEGERequestMessage"/>
+			<output message="tns:GetApplicationEGEResponseMessage"/>
+		</operation>
+		<operation name="GetMinimalBall">
+			<input message="tns:GetMinimalBallRequestMessage"/>
+			<output message="tns:GetMinimalBallResponseMessage"/>
+		</operation>
+		<operation name="GetPK">
+			<input message="tns:GetPKRequestMessage"/>
+			<output message="tns:GetPKResponseMessage"/>
+		</operation>
+		<operation name="GetPKInfo">
+			<input message="tns:GetPKInfoRequestMessage"/>
+			<output message="tns:GetPKInfoResponseMessage"/>
+		</operation>
+		<operation name="GetReleaseVersion">
+			<input message="tns:GetReleaseVersionRequestMessage"/>
+			<output message="tns:GetReleaseVersionResponseMessage"/>
+		</operation>
+		<operation name="GetStringsPriema">
+			<input message="tns:GetStringsPriemaRequestMessage"/>
+			<output message="tns:GetStringsPriemaResponseMessage"/>
+		</operation>
+		<operation name="NeedBlockAndUpdate">
+			<input message="tns:NeedBlockAndUpdateRequestMessage"/>
+			<output message="tns:NeedBlockAndUpdateResponseMessage"/>
+		</operation>
+		<operation name="TestConnect">
+			<input message="tns:TestConnectRequestMessage"/>
+			<output message="tns:TestConnectResponseMessage"/>
+		</operation>
+		<operation name="GetAbiturientCodeDoubles">
+			<input message="tns:GetAbiturientCodeDoublesRequestMessage"/>
+			<output message="tns:GetAbiturientCodeDoublesResponseMessage"/>
+		</operation>
+		<operation name="GetAllOlympiads">
+			<input message="tns:GetAllOlympiadsRequestMessage"/>
+			<output message="tns:GetAllOlympiadsResponseMessage"/>
+		</operation>
+		<operation name="GetAllAdmissionProcedures">
+			<input message="tns:GetAllAdmissionProceduresRequestMessage"/>
+			<output message="tns:GetAllAdmissionProceduresResponseMessage"/>
+		</operation>
+		<operation name="GetAllDocumentTypesAbiturient">
+			<input message="tns:GetAllDocumentTypesAbiturientRequestMessage"/>
+			<output message="tns:GetAllDocumentTypesAbiturientResponseMessage"/>
+		</operation>
+		<operation name="GetAllSpecialMarks">
+			<input message="tns:GetAllSpecialMarksRequestMessage"/>
+			<output message="tns:GetAllSpecialMarksResponseMessage"/>
+		</operation>
+		<operation name="GetOlympiad">
+			<input message="tns:GetOlympiadRequestMessage"/>
+			<output message="tns:GetOlympiadResponseMessage"/>
+		</operation>
+		<operation name="GetAvailableDocumentTypesForIndividualExam">
+			<input message="tns:GetAvailableDocumentTypesForIndividualExamRequestMessage"/>
+			<output message="tns:GetAvailableDocumentTypesForIndividualExamResponseMessage"/>
+		</operation>
+		<operation name="GetAvailableDocumentTypesForConcession">
+			<input message="tns:GetAvailableDocumentTypesForConcessionRequestMessage"/>
+			<output message="tns:GetAvailableDocumentTypesForConcessionResponseMessage"/>
+		</operation>
+		<operation name="GetReasons">
+			<input message="tns:GetReasonsRequestMessage"/>
+			<output message="tns:GetReasonsResponseMessage"/>
+		</operation>
+		<operation name="GetLanguages">
+			<input message="tns:GetLanguagesRequestMessage"/>
+			<output message="tns:GetLanguagesResponseMessage"/>
+		</operation>
+		<operation name="GetAbiturientCodeAlt">
+			<input message="tns:GetAbiturientCodeAltRequestMessage"/>
+			<output message="tns:GetAbiturientCodeAltResponseMessage"/>
+		</operation>
+		<operation name="ReturnAllApplications">
+			<input message="tns:ReturnAllApplicationsRequestMessage"/>
+			<output message="tns:ReturnAllApplicationsResponseMessage"/>
+		</operation>
+		<operation name="PutFilePart">
+			<input message="tns:PutFilePartRequestMessage"/>
+			<output message="tns:PutFilePartResponseMessage"/>
+		</operation>
+		<operation name="GetAbiturientCodePassFIOBDate">
+			<input message="tns:GetAbiturientCodePassFIOBDateRequestMessage"/>
+			<output message="tns:GetAbiturientCodePassFIOBDateResponseMessage"/>
+		</operation>
+		<operation name="GetAbitContractList">
+			<input message="tns:GetAbitContractListRequestMessage"/>
+			<output message="tns:GetAbitContractListResponseMessage"/>
+		</operation>
+		<operation name="GetContractReport">
+			<input message="tns:GetContractReportRequestMessage"/>
+			<output message="tns:GetContractReportResponseMessage"/>
+		</operation>
+		<operation name="GetReference">
+			<input message="tns:GetReferenceRequestMessage"/>
+			<output message="tns:GetReferenceResponseMessage"/>
+		</operation>
+		<operation name="GetReferences">
+			<input message="tns:GetReferencesRequestMessage"/>
+			<output message="tns:GetReferencesResponseMessage"/>
+		</operation>
+		<operation name="GetEntrantTestSets">
+			<input message="tns:GetEntrantTestSetsRequestMessage"/>
+			<output message="tns:GetEntrantTestSetsResponseMessage"/>
+		</operation>
+		<operation name="GetEducationLevelDocumentTypeMap">
+			<input message="tns:GetEducationLevelDocumentTypeMapRequestMessage"/>
+			<output message="tns:GetEducationLevelDocumentTypeMapResponseMessage"/>
+		</operation>
+		<operation name="GetPredmetsOfExamsSchedule">
+			<input message="tns:GetPredmetsOfExamsScheduleRequestMessage"/>
+			<output message="tns:GetPredmetsOfExamsScheduleResponseMessage"/>
+		</operation>
+		<operation name="GetDateTimeOfExamsSchedule">
+			<input message="tns:GetDateTimeOfExamsScheduleRequestMessage"/>
+			<output message="tns:GetDateTimeOfExamsScheduleResponseMessage"/>
+		</operation>
+		<operation name="GetAdditionalReceiptDateControl">
+			<input message="tns:GetAdditionalReceiptDateControlRequestMessage"/>
+			<output message="tns:GetAdditionalReceiptDateControlResponseMessage"/>
+		</operation>
+		<operation name="RunMethod">
+			<input message="tns:RunMethodRequestMessage"/>
+			<output message="tns:RunMethodResponseMessage"/>
+		</operation>
+		<operation name="GetDocumentTypePropertySettings">
+			<input message="tns:GetDocumentTypePropertySettingsRequestMessage"/>
+			<output message="tns:GetDocumentTypePropertySettingsResponseMessage"/>
+		</operation>
+		<operation name="GetAvailableDocumentTypes">
+			<input message="tns:GetAvailableDocumentTypesRequestMessage"/>
+			<output message="tns:GetAvailableDocumentTypesResponseMessage"/>
+		</operation>
+		<operation name="GetInterfaceVersions">
+			<input message="tns:GetInterfaceVersionsRequestMessage"/>
+			<output message="tns:GetInterfaceVersionsResponseMessage"/>
+		</operation>
+		<operation name="GetInterfaceVersion">
+			<input message="tns:GetInterfaceVersionRequestMessage"/>
+			<output message="tns:GetInterfaceVersionResponseMessage"/>
+		</operation>
+		<operation name="GetFiasRegionsList">
+			<input message="tns:GetFiasRegionsListRequestMessage"/>
+			<output message="tns:GetFiasRegionsListResponseMessage"/>
+		</operation>
+		<operation name="GetFiasRegionElements">
+			<input message="tns:GetFiasRegionElementsRequestMessage"/>
+			<output message="tns:GetFiasRegionElementsResponseMessage"/>
+		</operation>
+		<operation name="GetCurrentTime">
+			<input message="tns:GetCurrentTimeRequestMessage"/>
+			<output message="tns:GetCurrentTimeResponseMessage"/>
+		</operation>
+		<operation name="GetFiasOwnershipsBuildingsTypes">
+			<input message="tns:GetFiasOwnershipsBuildingsTypesRequestMessage"/>
+			<output message="tns:GetFiasOwnershipsBuildingsTypesResponseMessage"/>
+		</operation>
+		<operation name="GetContractorList">
+			<input message="tns:GetContractorListRequestMessage"/>
+			<output message="tns:GetContractorListResponseMessage"/>
+		</operation>
+		<operation name="GetOrCreateContractor">
+			<input message="tns:GetOrCreateContractorRequestMessage"/>
+			<output message="tns:GetOrCreateContractorResponseMessage"/>
+		</operation>
+		<operation name="RemoveZayavlenie">
+			<input message="tns:RemoveZayavlenieRequestMessage"/>
+			<output message="tns:RemoveZayavlenieResponseMessage"/>
+		</operation>
+		<operation name="GetAbiturientCampaigns">
+			<input message="tns:GetAbiturientCampaignsRequestMessage"/>
+			<output message="tns:GetAbiturientCampaignsResponseMessage"/>
+		</operation>
+		<operation name="RejectEnrollment">
+			<input message="tns:RejectEnrollmentRequestMessage"/>
+			<output message="tns:RejectEnrollmentResponseMessage"/>
+		</operation>
+		<operation name="GetAvailableDocumentTypesForCompatriots">
+			<input message="tns:GetAvailableDocumentTypesForCompatriotsRequestMessage"/>
+			<output message="tns:GetAvailableDocumentTypesForCompatriotsResponseMessage"/>
+		</operation>
+		<operation name="GetSeparateQuotaAdmissionProcedures">
+			<input message="tns:GetSeparateQuotaAdmissionProceduresRequestMessage"/>
+			<output message="tns:GetSeparateQuotaAdmissionProceduresResponseMessage"/>
+		</operation>
+		<operation name="GetAdmissionConditionGroups">
+			<input message="tns:GetAdmissionConditionGroupsRequestMessage"/>
+			<output message="tns:GetAdmissionConditionGroupsResponseMessage"/>
+		</operation>
+		<operation name="GetOlympicsInfo">
+			<input message="tns:GetOlympicsInfoRequestMessage"/>
+			<output message="tns:GetOlympicsInfoResponseMessage"/>
+		</operation>
+	</portType>
+	<binding name="WebAbitSoapBinding" type="tns:WebAbitPortType">
+		<soapbind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="DeleteIndividualExam">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:DeleteIndividualExam"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCode">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbiturientCode"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllIndividualExams">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllIndividualExams"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllPredmets">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllPredmets"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetApplicationEGE">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetApplicationEGE"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetMinimalBall">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetMinimalBall"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetPK">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetPK"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetPKInfo">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetPKInfo"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReleaseVersion">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetReleaseVersion"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetStringsPriema">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetStringsPriema"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="NeedBlockAndUpdate">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:NeedBlockAndUpdate"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="TestConnect">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:TestConnect"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCodeDoubles">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbiturientCodeDoubles"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllOlympiads">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllOlympiads"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllAdmissionProcedures">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllAdmissionProcedures"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllDocumentTypesAbiturient">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllDocumentTypesAbiturient"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllSpecialMarks">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllSpecialMarks"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetOlympiad">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetOlympiad"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAvailableDocumentTypesForIndividualExam">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAvailableDocumentTypesForIndividualExam"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAvailableDocumentTypesForConcession">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAvailableDocumentTypesForConcession"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReasons">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetReasons"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetLanguages">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetLanguages"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCodeAlt">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbiturientCodeAlt"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ReturnAllApplications">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:ReturnAllApplications"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PutFilePart">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:PutFilePart"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCodePassFIOBDate">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbiturientCodePassFIOBDate"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbitContractList">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbitContractList"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetContractReport">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetContractReport"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReference">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetReference"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReferences">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetReferences"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEntrantTestSets">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetEntrantTestSets"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEducationLevelDocumentTypeMap">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetEducationLevelDocumentTypeMap"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetPredmetsOfExamsSchedule">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetPredmetsOfExamsSchedule"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetDateTimeOfExamsSchedule">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetDateTimeOfExamsSchedule"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAdditionalReceiptDateControl">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAdditionalReceiptDateControl"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="RunMethod">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:RunMethod"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetDocumentTypePropertySettings">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetDocumentTypePropertySettings"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAvailableDocumentTypes">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAvailableDocumentTypes"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersions">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetInterfaceVersions"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersion">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetInterfaceVersion"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetFiasRegionsList">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetFiasRegionsList"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetFiasRegionElements">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetFiasRegionElements"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCurrentTime">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetCurrentTime"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetFiasOwnershipsBuildingsTypes">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetFiasOwnershipsBuildingsTypes"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetContractorList">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetContractorList"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetOrCreateContractor">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetOrCreateContractor"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="RemoveZayavlenie">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:RemoveZayavlenie"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCampaigns">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbiturientCampaigns"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="RejectEnrollment">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:RejectEnrollment"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAvailableDocumentTypesForCompatriots">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAvailableDocumentTypesForCompatriots"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetSeparateQuotaAdmissionProcedures">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetSeparateQuotaAdmissionProcedures"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAdmissionConditionGroups">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAdmissionConditionGroups"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetOlympicsInfo">
+			<soapbind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetOlympicsInfo"/>
+			<input>
+				<soapbind:body use="literal"/>
+			</input>
+			<output>
+				<soapbind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<binding name="WebAbitSoap12Binding" type="tns:WebAbitPortType">
+		<soap12bind:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<operation name="DeleteIndividualExam">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:DeleteIndividualExam"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCode">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbiturientCode"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllIndividualExams">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllIndividualExams"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllPredmets">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllPredmets"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetApplicationEGE">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetApplicationEGE"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetMinimalBall">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetMinimalBall"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetPK">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetPK"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetPKInfo">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetPKInfo"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReleaseVersion">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetReleaseVersion"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetStringsPriema">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetStringsPriema"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="NeedBlockAndUpdate">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:NeedBlockAndUpdate"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="TestConnect">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:TestConnect"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCodeDoubles">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbiturientCodeDoubles"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllOlympiads">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllOlympiads"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllAdmissionProcedures">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllAdmissionProcedures"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllDocumentTypesAbiturient">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllDocumentTypesAbiturient"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAllSpecialMarks">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAllSpecialMarks"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetOlympiad">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetOlympiad"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAvailableDocumentTypesForIndividualExam">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAvailableDocumentTypesForIndividualExam"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAvailableDocumentTypesForConcession">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAvailableDocumentTypesForConcession"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReasons">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetReasons"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetLanguages">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetLanguages"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCodeAlt">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbiturientCodeAlt"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="ReturnAllApplications">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:ReturnAllApplications"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="PutFilePart">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:PutFilePart"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCodePassFIOBDate">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbiturientCodePassFIOBDate"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbitContractList">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbitContractList"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetContractReport">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetContractReport"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReference">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetReference"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetReferences">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetReferences"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEntrantTestSets">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetEntrantTestSets"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetEducationLevelDocumentTypeMap">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetEducationLevelDocumentTypeMap"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetPredmetsOfExamsSchedule">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetPredmetsOfExamsSchedule"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetDateTimeOfExamsSchedule">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetDateTimeOfExamsSchedule"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAdditionalReceiptDateControl">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAdditionalReceiptDateControl"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="RunMethod">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:RunMethod"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetDocumentTypePropertySettings">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetDocumentTypePropertySettings"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAvailableDocumentTypes">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAvailableDocumentTypes"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersions">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetInterfaceVersions"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetInterfaceVersion">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetInterfaceVersion"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetFiasRegionsList">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetFiasRegionsList"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetFiasRegionElements">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetFiasRegionElements"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetCurrentTime">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetCurrentTime"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetFiasOwnershipsBuildingsTypes">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetFiasOwnershipsBuildingsTypes"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetContractorList">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetContractorList"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetOrCreateContractor">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetOrCreateContractor"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="RemoveZayavlenie">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:RemoveZayavlenie"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAbiturientCampaigns">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAbiturientCampaigns"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="RejectEnrollment">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:RejectEnrollment"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAvailableDocumentTypesForCompatriots">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAvailableDocumentTypesForCompatriots"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetSeparateQuotaAdmissionProcedures">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetSeparateQuotaAdmissionProcedures"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetAdmissionConditionGroups">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetAdmissionConditionGroups"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+		<operation name="GetOlympicsInfo">
+			<soap12bind:operation style="document" soapAction="http://sgu-infocom.ru#WebAbit:GetOlympicsInfo"/>
+			<input>
+				<soap12bind:body use="literal"/>
+			</input>
+			<output>
+				<soap12bind:body use="literal"/>
+			</output>
+		</operation>
+	</binding>
+	<service name="WebAbit">
+		<port name="WebAbitSoap" binding="tns:WebAbitSoapBinding">
+			<documentation> 
+				<wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" conformsTo="http://ws-i.org/profiles/basic/1.1"/>
+			</documentation>
+			<soapbind:address location="http://localhost/testun/ws/webabit.1cws"/>
+		</port>
+		<port name="WebAbitSoap12" binding="tns:WebAbitSoap12Binding">
+			<soap12bind:address location="http://localhost/testun/ws/webabit.1cws"/>
+		</port>
+	</service>
+</definitions>
