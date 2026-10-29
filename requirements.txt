@@ -1,0 +1,3 @@
+# Requires Python 3.9 or newer.
+# No third-party dependencies: the application and tests use the standard library.
+# Running `python -m pip install -r requirements.txt` installs no packages.
